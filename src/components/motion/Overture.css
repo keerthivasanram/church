@@ -1,0 +1,128 @@
+/* ============ THE OVERTURE — cinematic entrance ============ */
+.ov {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  overflow: hidden;
+  background: #0a0806;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The great doors */
+.ov__door {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.5%;
+  background:
+    linear-gradient(180deg, #100d0a 0%, #050403 100%);
+  z-index: 3;
+}
+.ov__door--l {
+  left: 0;
+  border-right: 1px solid rgba(201, 163, 78, 0.22);
+  box-shadow: 8px 0 40px rgba(0, 0, 0, 0.6);
+}
+.ov__door--r {
+  right: 0;
+  border-left: 1px solid rgba(201, 163, 78, 0.22);
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Shaft of light behind the parting doors */
+.ov__light {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34%;
+  height: 120%;
+  z-index: 2;
+  transform-origin: center;
+  background: linear-gradient(180deg,
+    rgba(230, 206, 134, 0.5) 0%,
+    rgba(201, 163, 78, 0.16) 45%,
+    transparent 82%);
+  filter: blur(26px);
+  opacity: 0;
+}
+
+/* Dust in the shaft */
+.ov__dust { position: absolute; inset: 0; z-index: 2; opacity: 0; }
+.ov__dust span {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(230, 206, 134, 0.8);
+  box-shadow: 0 0 6px rgba(201, 163, 78, 0.7);
+  animation: mote-drift linear infinite;
+}
+.ov__dust span:nth-child(1){left:44%;top:70%;animation-duration:18s}
+.ov__dust span:nth-child(2){left:52%;top:82%;animation-duration:22s;animation-delay:2s}
+.ov__dust span:nth-child(3){left:48%;top:60%;animation-duration:20s;animation-delay:5s}
+.ov__dust span:nth-child(4){left:56%;top:88%;animation-duration:24s;animation-delay:1s;width:1.4px;height:1.4px}
+.ov__dust span:nth-child(5){left:41%;top:78%;animation-duration:19s;animation-delay:7s}
+.ov__dust span:nth-child(6){left:58%;top:66%;animation-duration:23s;animation-delay:3s}
+.ov__dust span:nth-child(7){left:46%;top:90%;animation-duration:26s;animation-delay:6s;width:2.4px;height:2.4px}
+.ov__dust span:nth-child(8){left:53%;top:74%;animation-duration:21s;animation-delay:9s}
+.ov__dust span:nth-child(9){left:50%;top:84%;animation-duration:25s;animation-delay:4s}
+.ov__dust span:nth-child(10){left:43%;top:64%;animation-duration:20s;animation-delay:8s;width:1.2px;height:1.2px}
+.ov__dust span:nth-child(11){left:60%;top:80%;animation-duration:27s;animation-delay:2s}
+.ov__dust span:nth-child(12){left:47%;top:72%;animation-duration:22s;animation-delay:11s}
+.ov__dust span:nth-child(13){left:55%;top:62%;animation-duration:24s;animation-delay:5s}
+.ov__dust span:nth-child(14){left:49%;top:92%;animation-duration:29s;animation-delay:7s;width:1.6px;height:1.6px}
+.ov__dust span:nth-child(15){left:42%;top:86%;animation-duration:23s;animation-delay:10s}
+.ov__dust span:nth-child(16){left:57%;top:76%;animation-duration:26s;animation-delay:3s}
+.ov__dust span:nth-child(17){left:51%;top:68%;animation-duration:21s;animation-delay:12s}
+.ov__dust span:nth-child(18){left:45%;top:82%;animation-duration:28s;animation-delay:6s;width:1.3px;height:1.3px}
+
+/* Title */
+.ov__title-wrap {
+  position: relative;
+  z-index: 4;
+  text-align: center;
+  padding: 0 24px;
+}
+.ov__name {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: clamp(13px, 1.6vw, 17px);
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  opacity: 0;
+}
+.ov__verse {
+  display: block;
+  margin-top: 24px;
+  font-family: var(--font-display);
+  font-style: normal;
+  font-size: clamp(18px, 2.4vw, 28px);
+  color: rgba(240, 232, 218, 0.72);
+  opacity: 0;
+}
+
+.ov__skip {
+  position: absolute;
+  bottom: 34px;
+  right: 40px;
+  z-index: 5;
+  background: none;
+  border: none;
+  color: rgba(230, 206, 134, 0.6);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.4s ease;
+}
+.ov__skip:hover { color: var(--gold-light); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ov { display: none; }
+}

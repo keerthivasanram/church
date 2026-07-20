@@ -1,0 +1,67 @@
+/* ============ THRESHOLD — a breathing room between chapters ============ */
+.threshold {
+  position: relative;
+  overflow: hidden;
+  height: clamp(96px, 13vw, 150px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* dissolves one hall's ground into the next — no hard seam */
+  background: linear-gradient(180deg, var(--th-from, var(--ivory)) 0%, var(--th-to, var(--ivory)) 100%);
+}
+
+/* travelling shaft of light */
+.threshold__sweep {
+  position: absolute;
+  top: -60%;
+  left: 50%;
+  width: 46%;
+  height: 220%;
+  pointer-events: none;
+  transform-origin: center;
+  filter: blur(30px);
+  background: linear-gradient(90deg, transparent, rgba(201, 163, 78, 0.16), transparent);
+}
+.threshold--dark .threshold__sweep {
+  background: linear-gradient(90deg, transparent, rgba(230, 206, 134, 0.2), transparent);
+}
+
+/* rising incense */
+.threshold__motes { position: absolute; inset: 0; pointer-events: none; }
+.threshold__motes span {
+  position: absolute;
+  bottom: 0;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(201, 163, 78, 0.65);
+  box-shadow: 0 0 6px rgba(201, 163, 78, 0.5);
+  animation: mote-drift linear infinite;
+}
+.threshold--dark .threshold__motes span { background: rgba(230, 206, 134, 0.75); }
+.threshold__motes span:nth-child(1) { left: 26%; animation-duration: 15s; animation-delay: 0s; }
+.threshold__motes span:nth-child(2) { left: 40%; animation-duration: 19s; animation-delay: 3s; width: 1.4px; height: 1.4px; }
+.threshold__motes span:nth-child(3) { left: 55%; animation-duration: 17s; animation-delay: 6s; }
+.threshold__motes span:nth-child(4) { left: 68%; animation-duration: 21s; animation-delay: 2s; width: 1.2px; height: 1.2px; }
+.threshold__motes span:nth-child(5) { left: 78%; animation-duration: 18s; animation-delay: 8s; }
+
+.threshold__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.threshold__inner .ornament { margin: 0; }
+
+.threshold__label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  text-indent: 0.42em;
+  color: var(--gold-deep);
+}
+.threshold--dark .threshold__label { color: rgba(230, 206, 134, 0.72); }

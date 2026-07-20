@@ -1,0 +1,178 @@
+/* ======================================================================
+   CONTACT — fixed banner + overlapping panel (matches the Invite page)
+   ====================================================================== */
+.fpage {
+  position: relative;
+  margin-top: -84px;
+  background: var(--ivory);
+}
+
+/* ---- Fixed banner ---- */
+.fbanner {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: 70vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--cathedral);
+}
+.fbanner__bg {
+  position: absolute;
+  inset: 0;
+  background: url('../assets/images/site/hero-stained-glass.jpg') center 34% / cover no-repeat;
+  transform: scale(1.06);
+}
+.fbanner__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% 40%, transparent 24%, rgba(8, 6, 4, 0.6) 100%),
+    linear-gradient(180deg, rgba(8, 6, 4, 0.55) 0%, rgba(8, 6, 4, 0.2) 42%, rgba(8, 6, 4, 0.75) 100%);
+}
+.fbanner__inner {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding-bottom: 80px;
+}
+.fbanner__inner h1 {
+  margin: 0;
+  color: var(--ivory);
+  font-size: clamp(48px, 7.5vw, 104px);
+  letter-spacing: -0.02em;
+  text-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- Overlapping panel ---- */
+.fpanel {
+  position: relative;
+  z-index: 1;
+  margin-top: -130px;
+  padding: clamp(48px, 6vw, 88px) 0 clamp(90px, 11vw, 150px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(232, 224, 210, 0.25)),
+    var(--marble);
+  border-top: 1px solid rgba(201, 163, 78, 0.4);
+  border-radius: 50% 50% 0 0 / 70px 70px 0 0;
+  box-shadow: 0 -40px 90px -50px rgba(20, 16, 10, 0.5);
+}
+.fpanel__intro {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto clamp(44px, 6vw, 72px);
+}
+.fpanel__intro .lede { margin: 0 0 14px; }
+.fpanel__note {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+/* ---- Contact grid: details + form ---- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: clamp(40px, 6vw, 88px);
+  align-items: start;
+}
+
+.contact-info { display: flex; flex-direction: column; }
+.contact-info__row {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+.contact-info__row:first-child { border-top: 1px solid var(--line); }
+.contact-info__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+.contact-info a,
+.contact-info__row > span:not(.contact-info__label):not(.contact-info__social) {
+  color: var(--ink);
+  font-size: 17px;
+}
+.contact-info a:hover { color: var(--gold-deep); }
+.contact-info__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+/* ---- Form ---- */
+.fform { display: flex; flex-direction: column; gap: clamp(20px, 2.4vw, 30px); }
+.fform__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 2.4vw, 30px);
+}
+.fform label {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.fform input,
+.fform textarea {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--ink);
+  padding: 15px 17px;
+  background: rgba(232, 224, 210, 0.42);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.fform input::placeholder,
+.fform textarea::placeholder { color: rgba(90, 78, 59, 0.45); }
+.fform input:focus,
+.fform textarea:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 163, 78, 0.14);
+}
+.fform textarea { min-height: 160px; resize: vertical; }
+.fform__actions { display: flex; justify-content: flex-end; margin-top: 6px; }
+.fform__success {
+  margin: 4px 0 0;
+  text-align: right;
+  color: var(--gold-deep);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .fpanel { margin-top: -90px; }
+}
+@media (max-width: 560px) {
+  .fpage { margin-top: -72px; }
+  .fform__row { grid-template-columns: 1fr; }
+  .fform__actions { justify-content: stretch; }
+  .fform__actions .btn { width: 100%; }
+  .fbanner { height: 64vh; min-height: 420px; }
+}

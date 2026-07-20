@@ -1,0 +1,77 @@
+/* ============ AMBIENT CATHEDRAL ATMOSPHERE ============ */
+.ambient {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Volumetric god-rays ---- */
+.ambient__rays {
+  position: absolute;
+  top: -30%;
+  left: 8%;
+  width: 70%;
+  height: 150%;
+  transform-origin: top center;
+  animation: ray-sway 16s ease-in-out infinite;
+}
+.ambient__rays span {
+  position: absolute;
+  top: 0;
+  width: 22%;
+  height: 100%;
+  filter: blur(18px);
+  mix-blend-mode: screen;
+  transform: skewX(-8deg);
+}
+.ambient--gold .ambient__rays span {
+  background: linear-gradient(180deg, rgba(201, 163, 78, 0.16) 0%, rgba(201, 163, 78, 0.04) 45%, transparent 75%);
+}
+.ambient--dark .ambient__rays span {
+  background: linear-gradient(180deg, rgba(230, 206, 134, 0.2) 0%, rgba(230, 206, 134, 0.05) 45%, transparent 78%);
+}
+.ambient__rays span:nth-child(1) { left: 4%; animation: light-breathe 11s ease-in-out infinite; }
+.ambient__rays span:nth-child(2) { left: 34%; width: 16%; animation: light-breathe 14s ease-in-out 2s infinite; }
+.ambient__rays span:nth-child(3) { left: 62%; width: 26%; animation: light-breathe 17s ease-in-out 5s infinite; }
+
+/* ---- Slow drifting fog ---- */
+.ambient__fog {
+  position: absolute;
+  inset: -20% -20% auto -20%;
+  height: 70%;
+  bottom: 0;
+  top: auto;
+  background: radial-gradient(120% 80% at 50% 120%, rgba(240, 232, 218, 0.5), transparent 70%);
+  filter: blur(30px);
+  animation: fog-drift 26s ease-in-out infinite alternate;
+}
+.ambient--dark .ambient__fog {
+  background: radial-gradient(120% 80% at 50% 120%, rgba(32, 29, 26, 0.6), transparent 70%);
+}
+
+/* ---- Drifting dust / incense motes ---- */
+.ambient__dust span {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(230, 206, 134, 0.7);
+  box-shadow: 0 0 6px rgba(201, 163, 78, 0.6);
+  animation: mote-drift linear infinite;
+}
+.ambient__dust span:nth-child(1)  { left: 8%;  top: 78%; animation-duration: 20s; animation-delay: 0s; }
+.ambient__dust span:nth-child(2)  { left: 18%; top: 88%; animation-duration: 26s; animation-delay: 3s; width: 1.5px; height: 1.5px; }
+.ambient__dust span:nth-child(3)  { left: 27%; top: 70%; animation-duration: 23s; animation-delay: 6s; }
+.ambient__dust span:nth-child(4)  { left: 36%; top: 92%; animation-duration: 29s; animation-delay: 1s; width: 1px; height: 1px; }
+.ambient__dust span:nth-child(5)  { left: 44%; top: 80%; animation-duration: 21s; animation-delay: 8s; }
+.ambient__dust span:nth-child(6)  { left: 52%; top: 86%; animation-duration: 27s; animation-delay: 4s; width: 2.5px; height: 2.5px; }
+.ambient__dust span:nth-child(7)  { left: 60%; top: 74%; animation-duration: 24s; animation-delay: 11s; }
+.ambient__dust span:nth-child(8)  { left: 67%; top: 90%; animation-duration: 30s; animation-delay: 2s; width: 1.5px; height: 1.5px; }
+.ambient__dust span:nth-child(9)  { left: 74%; top: 82%; animation-duration: 22s; animation-delay: 7s; }
+.ambient__dust span:nth-child(10) { left: 81%; top: 76%; animation-duration: 28s; animation-delay: 5s; width: 1px; height: 1px; }
+.ambient__dust span:nth-child(11) { left: 88%; top: 88%; animation-duration: 25s; animation-delay: 9s; }
+.ambient__dust span:nth-child(12) { left: 93%; top: 72%; animation-duration: 31s; animation-delay: 12s; width: 2px; height: 2px; }
+.ambient__dust span:nth-child(13) { left: 13%; top: 84%; animation-duration: 24s; animation-delay: 14s; }
+.ambient__dust span:nth-child(14) { left: 48%; top: 94%; animation-duration: 33s; animation-delay: 6s; width: 1.5px; height: 1.5px; }

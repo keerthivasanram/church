@@ -1,0 +1,148 @@
+/* ======================================================================
+   INVITE — a fixed banner the request form scrolls up to overlap
+   ====================================================================== */
+.invite {
+  position: relative;
+  margin-top: -84px; /* slide the banner beneath the floating header */
+  background: var(--ivory);
+}
+
+/* ---- Fixed banner (sticky-pinned while the panel rises over it) ---- */
+.invite-banner {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: 74vh;
+  min-height: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--cathedral);
+}
+.invite-banner__bg {
+  position: absolute;
+  inset: 0;
+  background: url('../assets/images/site/hero-stained-glass.jpg') center 34% / cover no-repeat;
+  transform: scale(1.06);
+}
+.invite-banner__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% 40%, transparent 24%, rgba(8, 6, 4, 0.6) 100%),
+    linear-gradient(180deg, rgba(8, 6, 4, 0.55) 0%, rgba(8, 6, 4, 0.2) 42%, rgba(8, 6, 4, 0.75) 100%);
+}
+.invite-banner__inner {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding-bottom: 90px; /* keep the title clear of the overlapping panel */
+}
+.invite-banner__inner h1 {
+  margin: 0;
+  color: var(--ivory);
+  font-size: clamp(46px, 7vw, 96px);
+  letter-spacing: -0.02em;
+  text-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- Panel that overlaps the banner ---- */
+.invite-panel {
+  position: relative;
+  z-index: 1;
+  margin-top: -130px;              /* overlap up onto the banner */
+  padding: clamp(48px, 6vw, 88px) 0 clamp(90px, 11vw, 150px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(232, 224, 210, 0.25)),
+    var(--marble);
+  border-top: 1px solid rgba(201, 163, 78, 0.4);
+  /* a broad arch threshold at the top edge */
+  border-radius: 50% 50% 0 0 / 70px 70px 0 0;
+  box-shadow: 0 -40px 90px -50px rgba(20, 16, 10, 0.5);
+}
+
+.invite-panel__intro {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto clamp(44px, 6vw, 72px);
+}
+.invite-panel__intro .lede { margin: 0 0 14px; }
+.invite-panel__note {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+/* ---- The three-column request form ---- */
+.invite-form__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(22px, 2.6vw, 34px) clamp(24px, 3vw, 44px);
+}
+.invite-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.invite-form__full { grid-column: 1 / -1; }
+
+.invite-form input,
+.invite-form textarea {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--ink);
+  padding: 15px 17px;
+  background: rgba(232, 224, 210, 0.42);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.invite-form input::placeholder,
+.invite-form textarea::placeholder { color: rgba(90, 78, 59, 0.45); }
+.invite-form input:focus,
+.invite-form textarea:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 163, 78, 0.14);
+}
+.invite-form textarea { min-height: 150px; resize: vertical; }
+
+.invite-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: clamp(28px, 3.5vw, 44px);
+}
+.invite-form__success {
+  margin: 22px 0 0;
+  text-align: right;
+  color: var(--gold-deep);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .invite-form__grid { grid-template-columns: repeat(2, 1fr); }
+  .invite-panel { margin-top: -90px; }
+}
+@media (max-width: 560px) {
+  .invite { margin-top: -72px; }
+  .invite-form__grid { grid-template-columns: 1fr; }
+  .invite-form__actions { justify-content: stretch; }
+  .invite-form__actions .btn { width: 100%; }
+  .invite-banner { height: 66vh; min-height: 440px; }
+}

@@ -1,0 +1,551 @@
+/* ======================================================================
+   SANCTUARY — a Vatican-inspired luxury design system
+   "If Apple designed the Vatican's official digital experience."
+   Renaissance × Roman architecture × luxury editorial × premium motion.
+   ====================================================================== */
+
+:root {
+  /* ---- Basilica palette ---- */
+  --ivory: #F8F6F2;
+  --travertine: #E8E0D2;
+  --marble: #F1EBDE;
+  --gold: #C9A34E;          /* Roman / 24K gold — the single accent */
+  --gold-light: #E6CE86;
+  --gold-deep: #9A7B33;
+  --burgundy: #5B1F28;
+  --burgundy-deep: #421119;
+  --cathedral: #151515;     /* Cathedral black */
+  --cathedral-2: #201d1a;
+  --stone: #857D72;         /* Stone gray */
+
+  /* ---- Semantic tokens (repointed to the basilica palette) ---- */
+  --bg: #F8F6F2;
+  --bg-soft: #EFE8DA;
+  --bg-warm: #F3EDE1;
+  --ink: #1C1A16;           /* warm near-black text */
+  --ink-soft: #4A443B;
+  --muted: #857D72;
+  --line: #E0D6C4;          /* travertine hairline */
+  --line-strong: #CDBE9E;
+
+  /* gilded glass surfaces */
+  --glass: rgba(248, 246, 242, 0.72);
+  --glass-brd: rgba(201, 163, 78, 0.28);
+
+  /* accent aliases → gold (so all existing var(--accent) usage becomes gold) */
+  --accent: #C9A34E;
+  --accent-dark: #9A7B33;
+  --accent-soft: rgba(201, 163, 78, 0.08);
+  --accent-tint: rgba(201, 163, 78, 0.16);
+
+  /* dark / stone */
+  --dark: #151515;
+  --dark-soft: #201d1a;
+
+  /* elevation — soft, editorial */
+  --shadow-xs: 0 1px 3px -1px rgba(20, 16, 10, 0.08);
+  --shadow-sm: 0 4px 18px -8px rgba(20, 16, 10, 0.16);
+  --shadow-md: 0 20px 50px -22px rgba(20, 16, 10, 0.28);
+  --shadow-lg: 0 40px 90px -30px rgba(20, 16, 10, 0.36);
+  --shadow-gold: 0 20px 60px -20px rgba(201, 163, 78, 0.4);
+
+  /* motion — slow, reverent, no bounce (walking through a basilica) */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-slow: cubic-bezier(0.22, 1, 0.24, 1);
+  --dur: 0.6s;
+  --dur-slow: 1.1s;
+
+  --font-display: 'Cormorant Garamond Variable', 'Cormorant Garamond', 'Canela', Georgia, serif;
+  --font-sans: 'Manrope Variable', 'Manrope', 'Inter Variable', system-ui, sans-serif;
+
+  color-scheme: light;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  color: var(--ink-soft);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  position: relative;
+}
+
+/* Faint travertine grain over the whole page — barely-there marble tooth */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--gold-light); color: var(--cathedral); }
+
+/* ---- Smooth scroll (Lenis drives; guard native as fallback) ---- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ================= TYPOGRAPHY ================= */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 0 18px;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(52px, 9vw, 132px); font-weight: 500; }
+h2 { font-size: clamp(40px, 5.6vw, 82px); }
+h3 { font-size: clamp(26px, 3vw, 38px); }
+h4 { font-size: 23px; }
+
+p { margin: 0 0 18px; }
+
+.display { font-family: var(--font-display); }
+
+/* Gilded text — 24K gold, upright (used for headline accents) */
+.accent,
+.grad {
+  background: linear-gradient(96deg, var(--gold-deep) 0%, var(--gold) 34%, var(--gold-light) 62%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Roman-inscription eyebrow — small-caps, wide-tracked gold */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 22px;
+}
+.eyebrow::before {
+  content: '';
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.eyebrow--center { justify-content: center; }
+
+/* Chapter numeral — the journey is told in chapters, not sections */
+.chapter {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  margin-right: 2px;
+}
+.eyebrow--center::after {
+  content: '';
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.lede {
+  font-size: clamp(17px, 1.6vw, 20px);
+  color: var(--ink-soft);
+  line-height: 1.75;
+  font-weight: 400;
+}
+
+/* ================= LAYOUT ================= */
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.container--narrow { max-width: 880px; }
+
+.section {
+  position: relative;
+  padding: clamp(120px, 15vw, 220px) 0;
+}
+
+/* Light grounds carry stone materiality — marble veining, warm raking light and
+   a soft edge vignette, so an ivory hall never reads as flat colour. */
+.section::before,
+.marble-ground::before,
+.threshold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* seamless stone tooth — tiles continuously across halls and thresholds */
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='v'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.05' numOctaves='4' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23v)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 620px 620px;
+  background-blend-mode: multiply;
+}
+/* warm raking light belongs to the halls, not the thresholds */
+.section::after,
+.marble-ground::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(140% 80% at 50% -20%, rgba(201, 163, 78, 0.07), transparent 66%),
+    radial-gradient(90% 60% at 100% 120%, rgba(133, 125, 114, 0.045), transparent 72%);
+}
+.threshold--dark::before { display: none; }
+
+.grid { display: grid; gap: clamp(22px, 2.6vw, 36px); }
+.stack { display: flex; flex-direction: column; gap: 16px; }
+
+/* ================= SURFACES ================= */
+/* Gilded glass */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-brd);
+  border-radius: 4px;
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+}
+
+/* Travertine marble card with a gold hairline — the default card */
+.card {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(232, 224, 210, 0.28)),
+    var(--marble);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  box-shadow: var(--shadow-sm);
+}
+/* Gold inner hairline frame that lights on hover */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  pointer-events: none;
+  transition: border-color var(--dur) var(--ease);
+}
+.card:hover::after { border-color: rgba(201, 163, 78, 0.5); }
+
+/* Dark stone card variant */
+.card--stone {
+  background:
+    linear-gradient(180deg, rgba(40, 34, 28, 0.9), rgba(21, 21, 21, 0.96)),
+    var(--cathedral);
+  border-color: rgba(201, 163, 78, 0.24);
+  color: rgba(240, 232, 218, 0.82);
+}
+.card--stone h1, .card--stone h2, .card--stone h3, .card--stone h4 { color: var(--ivory); }
+
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  z-index: 3;
+}
+
+/* Section grounds */
+.section-soft { background: var(--bg-soft); }
+.section-warm { background: var(--bg-warm); }
+.section-dark {
+  background: var(--cathedral);
+  color: rgba(206, 198, 184, 0.85);
+}
+/* stone materiality is for light halls only */
+.section-dark::before,
+.section-dark::after { display: none; }
+.section-dark h1, .section-dark h2, .section-dark h3, .section-dark h4 { color: var(--ivory); }
+
+.section-head {
+  max-width: 760px;
+  margin: 0 auto clamp(64px, 8vw, 110px);
+  text-align: center;
+}
+.section-head p { margin: 0; }
+
+/* ================= ORNAMENT ================= */
+/* Gilded divider with a central cross-star — draws itself in via .is-drawn */
+.orn-rule {
+  display: block;
+  width: 190px;
+  height: 1px;
+  margin: 34px auto 0;
+  position: relative;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+  transform: scaleX(0.15);
+  opacity: 0;
+  transition: transform 1.2s var(--ease-slow), opacity 0.8s var(--ease);
+}
+.orn-rule.is-drawn { transform: scaleX(1); opacity: 1; }
+.orn-rule::before {
+  content: '✦';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  line-height: 1;
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(201, 163, 78, 0.5);
+}
+.orn-rule--sm { width: 108px; margin: 22px auto; }
+.orn-rule--sm::before { font-size: 10px; }
+
+/* Animated self-drawing gilded ornament (see motion/Ornament.jsx) */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 34px 0 0;
+}
+.ornament--center { justify-content: center; }
+.ornament--sm { margin: 22px 0; gap: 12px; }
+.ornament__line {
+  display: block;
+  width: 96px;
+  height: 1px;
+  background: var(--gold);
+}
+.ornament--sm .ornament__line { width: 54px; }
+.ornament__line--l {
+  transform-origin: right center;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.ornament__line--r {
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.ornament__mark {
+  font-size: 13px;
+  line-height: 1;
+  color: var(--gold);
+  text-shadow: 0 0 14px rgba(201, 163, 78, 0.55);
+}
+.ornament--sm .ornament__mark { font-size: 10px; }
+
+/* Round Romanesque arch frame for imagery */
+.arch {
+  border-radius: 50% 50% 3px 3px / 22% 22% 3px 3px;
+  overflow: hidden;
+}
+/* Pointed Gothic arch */
+.arch--gothic {
+  border-radius: 0;
+  clip-path: path('M0,100 L0,42 Q0,0 50,0 Q100,0 100,42 L100,100 Z');
+  -webkit-clip-path: path('M0,100 L0,42 Q0,0 50,0 Q100,0 100,42 L100,100 Z');
+}
+
+/* ================= PAGE HERO (inner pages) ================= */
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(180px, 20vw, 280px) 0 clamp(110px, 11vw, 170px);
+  text-align: center;
+  background:
+    radial-gradient(1400px 640px at 50% -10%, rgba(201, 163, 78, 0.14), transparent 66%),
+    linear-gradient(180deg, var(--travertine), var(--ivory));
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 1;
+}
+.page-hero > .container { position: relative; z-index: 2; }
+.page-hero h1 {
+  margin: 0;
+  font-size: clamp(52px, 8vw, 104px);
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+.page-hero__rule {
+  display: block;
+  width: 190px;
+  height: 1px;
+  margin: 34px auto 0;
+  position: relative;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+}
+.page-hero__rule::before {
+  content: '✦';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(201, 163, 78, 0.5);
+}
+/* Colossal ambient Roman title behind the hero */
+.page-hero__bg-text {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: clamp(140px, 24vw, 360px);
+  font-weight: 600;
+  color: rgba(133, 125, 114, 0.1);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+  letter-spacing: -0.04em;
+  user-select: none;
+}
+
+/* ================= BUTTONS ================= */
+/* Buttons read as engraved bronze plates — beveled, gilt-edged; a sheet of gold
+   wipes across on hover (background-size, so the label always stays above it). */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 42px;
+  border-radius: 1px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid var(--gold-deep);
+  color: var(--gold-deep);
+  background-image:
+    linear-gradient(96deg, var(--gold-deep), var(--gold), var(--gold-light)),
+    linear-gradient(180deg, rgba(201, 163, 78, 0.12), rgba(154, 123, 51, 0.04));
+  background-repeat: no-repeat;
+  background-size: 0% 100%, 100% 100%;
+  background-position: left center, center;
+  box-shadow: inset 0 1px 0 rgba(255, 245, 220, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+  transition: background-size var(--dur-slow) var(--ease), color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+.btn:hover {
+  color: var(--cathedral);
+  border-color: var(--gold);
+  background-size: 100% 100%, 100% 100%;
+  box-shadow: var(--shadow-gold);
+}
+.btn:hover .btn__arrow { transform: translateX(5px); }
+.btn__arrow { transition: transform var(--dur) var(--ease); }
+
+/* Primary — the fully gilt-edged plate (default styling above already fits) */
+.btn-primary { border-color: var(--gold); }
+
+/* Ghost — quieter stone plate for light grounds */
+.btn-ghost {
+  border-color: var(--line-strong);
+  color: var(--ink);
+  background-image:
+    linear-gradient(96deg, var(--gold-deep), var(--gold), var(--gold-light)),
+    linear-gradient(180deg, rgba(232, 224, 210, 0.4), rgba(232, 224, 210, 0.15));
+}
+
+/* Outline — for dark grounds; cream label until the gold sheet fills */
+.btn-outline {
+  border-color: rgba(230, 206, 134, 0.5);
+  color: var(--ivory);
+  background-image:
+    linear-gradient(96deg, var(--gold-deep), var(--gold), var(--gold-light)),
+    linear-gradient(180deg, rgba(230, 206, 134, 0.08), rgba(0, 0, 0, 0.06));
+}
+
+/* ================= STAT ================= */
+.stat { text-align: center; padding: 8px 12px; }
+.stat__num {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 5.5vw, 72px);
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.stat__label {
+  margin-top: 14px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ================= MOTION KEYFRAMES ================= */
+/* Gold shimmer sweep across gilded text/elements */
+@keyframes gild-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+/* Ambient breathe for volumetric light */
+@keyframes light-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.62; }
+}
+/* Slow drifting dust/incense mote */
+@keyframes mote-drift {
+  0% { transform: translate(0, 0); opacity: 0; }
+  12% { opacity: 0.5; }
+  88% { opacity: 0.35; }
+  100% { transform: translate(24px, -120px); opacity: 0; }
+}
+/* Sun-ray slow sway */
+@keyframes ray-sway {
+  0%, 100% { transform: rotate(-3deg) scaleY(1); }
+  50% { transform: rotate(-1deg) scaleY(1.04); }
+}
+/* Fog drift */
+@keyframes fog-drift {
+  0% { transform: translateX(-6%); }
+  100% { transform: translateX(6%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

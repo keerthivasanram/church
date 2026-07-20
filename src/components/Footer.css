@@ -1,0 +1,171 @@
+/* ============ FOOTER — the closing scene of the pilgrimage ============ */
+.site-footer {
+  position: relative;
+  background: linear-gradient(180deg, #100d0a 0%, var(--cathedral) 55%, #0c0a08 100%);
+  color: rgba(206, 198, 184, 0.7);
+  margin-top: auto;
+  overflow: hidden;
+  border-top: 1px solid rgba(201, 163, 78, 0.3);
+}
+
+/* candle glow rising from the floor */
+.site-footer__candle {
+  position: absolute;
+  bottom: -18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 620px;
+  pointer-events: none;
+  background: radial-gradient(ellipse at bottom, rgba(201, 163, 78, 0.2) 0%, rgba(201, 163, 78, 0.05) 38%, transparent 70%);
+  animation: light-breathe 9s ease-in-out infinite;
+}
+
+/* embers drifting up */
+.site-footer__motes { position: absolute; inset: 0; pointer-events: none; }
+.site-footer__motes span {
+  position: absolute;
+  bottom: 8%;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(230, 206, 134, 0.7);
+  box-shadow: 0 0 7px rgba(201, 163, 78, 0.7);
+  animation: mote-drift linear infinite;
+}
+.site-footer__motes span:nth-child(1) { left: 34%; animation-duration: 17s; }
+.site-footer__motes span:nth-child(2) { left: 44%; animation-duration: 22s; animation-delay: 4s; width: 1.4px; height: 1.4px; }
+.site-footer__motes span:nth-child(3) { left: 52%; animation-duration: 19s; animation-delay: 8s; }
+.site-footer__motes span:nth-child(4) { left: 60%; animation-duration: 24s; animation-delay: 2s; width: 1.2px; height: 1.2px; }
+.site-footer__motes span:nth-child(5) { left: 68%; animation-duration: 20s; animation-delay: 11s; }
+.site-footer__motes span:nth-child(6) { left: 40%; animation-duration: 26s; animation-delay: 6s; }
+
+/* ── closing scene ── */
+.site-footer__closing {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: clamp(80px, 11vw, 150px) 0 clamp(56px, 7vw, 90px);
+  max-width: 760px;
+  margin: 0 auto;
+}
+.site-footer__seal {
+  display: block;
+  margin: 0 auto 30px;
+  filter: drop-shadow(0 0 22px rgba(201, 163, 78, 0.35));
+}
+.site-footer__verse {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.2vw, 40px);
+  line-height: 1.32;
+  color: var(--ivory);
+}
+.site-footer__ref {
+  display: block;
+  margin-top: 22px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: rgba(230, 206, 134, 0.7);
+}
+.site-footer__closing .ornament { margin-top: 30px; }
+
+/* ── details ── */
+.site-footer__grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 56px;
+  padding: clamp(48px, 6vw, 80px) 0 60px;
+  border-top: 1px solid rgba(201, 163, 78, 0.14);
+}
+
+.site-footer__name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--ivory);
+  margin-bottom: 14px;
+}
+.site-footer__brand p {
+  max-width: 320px;
+  font-family: var(--font-display);
+  font-size: 19px;
+  line-height: 1.6;
+  color: rgba(230, 222, 208, 0.8);
+}
+
+.site-footer h4 {
+  color: var(--gold-light);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.site-footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 14px;
+}
+
+.site-footer a,
+.site-footer__links span {
+  color: rgba(206, 198, 184, 0.7);
+  transition: color var(--dur) var(--ease);
+}
+.site-footer a:hover { color: var(--gold-light); }
+
+.site-footer__social {
+  display: flex;
+  gap: 22px;
+  margin-top: 26px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.site-footer__bottom {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(201, 163, 78, 0.14);
+  padding: 24px 0;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(133, 125, 114, 0.8);
+}
+.site-footer__bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+/* a quiet credit line — not a nav item, easy to miss unless you're looking */
+.site-footer__credit {
+  color: rgba(133, 125, 114, 0.55);
+  text-decoration: none;
+  border-left: 1px solid rgba(133, 125, 114, 0.3);
+  padding-left: 10px;
+  transition: color var(--dur) var(--ease);
+}
+.site-footer__credit:hover { color: var(--gold-light); }
+@media (max-width: 500px) {
+  .site-footer__credit { border-left: none; padding-left: 0; }
+}
+
+@media (max-width: 760px) {
+  .site-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
