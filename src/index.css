@@ -5,49 +5,71 @@
    ====================================================================== */
 
 :root {
-  /* ---- Basilica palette ---- */
-  --ivory: #F8F6F2;
-  --travertine: #E8E0D2;
-  --marble: #F1EBDE;
-  --gold: #C9A34E;          /* Roman / 24K gold — the single accent */
-  --gold-light: #E6CE86;
-  --gold-deep: #9A7B33;
-  --burgundy: #5B1F28;
-  --burgundy-deep: #421119;
-  --cathedral: #151515;     /* Cathedral black */
-  --cathedral-2: #201d1a;
-  --stone: #857D72;         /* Stone gray */
+  /* ---- Ember palette — obsidian · ember orange · white ----
+     Reskinned 2026-07-21 at the user's direction: Roman gold → burnt ember
+     orange, warm ivory → white, cathedral black → obsidian. Every accent in the
+     codebase resolves through --accent / --accent-rgb, so the whole site can be
+     re-toned from this block alone. */
+  --white: #FFFFFF;
 
-  /* ---- Semantic tokens (repointed to the basilica palette) ---- */
-  --bg: #F8F6F2;
-  --bg-soft: #EFE8DA;
-  --bg-warm: #F3EDE1;
-  --ink: #1C1A16;           /* warm near-black text */
-  --ink-soft: #4A443B;
-  --muted: #857D72;
-  --line: #E0D6C4;          /* travertine hairline */
-  --line-strong: #CDBE9E;
+  /* ---- The page ground stays WHITE. Black is a *section* material, not the
+         background: the halls alternate white → black → white, and the raised
+         surfaces inside them are black panels with an ember edge. ---- */
+  --ivory: #FFFFFF;         /* the page ground */
+  --travertine: #EFEEEC;    /* light stone, for surfaces on white halls */
+  --marble: #F6F5F3;
 
-  /* gilded glass surfaces */
-  --glass: rgba(248, 246, 242, 0.72);
-  --glass-brd: rgba(201, 163, 78, 0.28);
+  --ember: #C75B12;         /* the single accent — burnt, never bright */
+  --ember-light: #E8763A;
+  --ember-deep: #8A3B08;
+  --flame: #F89020;         /* the logo's own orange — reserved for the mark */
 
-  /* accent aliases → gold (so all existing var(--accent) usage becomes gold) */
-  --accent: #C9A34E;
-  --accent-dark: #9A7B33;
-  --accent-soft: rgba(201, 163, 78, 0.08);
-  --accent-tint: rgba(201, 163, 78, 0.16);
+  --burgundy: #5A2408;
+  --burgundy-deep: #3A1604;
+  --obsidian: #0A0A0B;      /* the black the dark halls and panels are cut from */
+  --obsidian-2: #131316;
+  --cathedral: #060607;     /* the deepest rooms — Scripture, the Invitation */
+  --cathedral-2: #0E0E11;
+  --stone: #7A7A80;
 
-  /* dark / stone */
-  --dark: #151515;
-  --dark-soft: #201d1a;
+  /* rgb triples so every alpha variant stays tokenised */
+  --accent-rgb: 199, 91, 18;
+  --accent-light-rgb: 232, 118, 58;
+
+  /* ---- Semantic tokens (light ground) ---- */
+  --bg: #FFFFFF;
+  --bg-soft: #0A0A0B;       /* the alternating hall IS black now */
+  --bg-warm: #F7F6F4;
+  --ink: #101012;
+  --ink-soft: #3C3C41;
+  --muted: #7A7A80;
+  --line: #E5E3DF;
+  --line-strong: #CAC7C2;
+
+  --glass: rgba(255, 255, 255, 0.72);
+  --glass-brd: rgba(var(--accent-rgb), 0.28);
+
+  --accent: var(--ember);
+  --accent-light: var(--ember-light);
+  --accent-deep: var(--ember-deep);
+  --accent-dark: var(--ember-deep);
+  --accent-soft: rgba(var(--accent-rgb), 0.08);
+  --accent-tint: rgba(var(--accent-rgb), 0.16);
+
+  /* legacy aliases — parts of the codebase still say "gold" */
+  --gold: var(--ember);
+  --gold-light: var(--ember-light);
+  --gold-deep: var(--ember-deep);
+
+  --dark: var(--obsidian);
+  --dark-soft: var(--obsidian-2);
 
   /* elevation — soft, editorial */
-  --shadow-xs: 0 1px 3px -1px rgba(20, 16, 10, 0.08);
-  --shadow-sm: 0 4px 18px -8px rgba(20, 16, 10, 0.16);
-  --shadow-md: 0 20px 50px -22px rgba(20, 16, 10, 0.28);
-  --shadow-lg: 0 40px 90px -30px rgba(20, 16, 10, 0.36);
-  --shadow-gold: 0 20px 60px -20px rgba(201, 163, 78, 0.4);
+  --shadow-xs: 0 1px 3px -1px rgba(12, 12, 14, 0.08);
+  --shadow-sm: 0 4px 18px -8px rgba(12, 12, 14, 0.16);
+  --shadow-md: 0 20px 50px -22px rgba(12, 12, 14, 0.28);
+  --shadow-lg: 0 40px 90px -30px rgba(12, 12, 14, 0.36);
+  --shadow-gold: 0 20px 60px -20px rgba(var(--accent-rgb), 0.4);
 
   /* motion — slow, reverent, no bounce (walking through a basilica) */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -222,8 +244,8 @@ p { margin: 0 0 18px; }
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(140% 80% at 50% -20%, rgba(201, 163, 78, 0.07), transparent 66%),
-    radial-gradient(90% 60% at 100% 120%, rgba(133, 125, 114, 0.045), transparent 72%);
+    radial-gradient(140% 80% at 50% -20%, rgba(var(--accent-rgb), 0.07), transparent 66%),
+    radial-gradient(90% 60% at 100% 120%, rgba(122, 122, 128, 0.045), transparent 72%);
 }
 .threshold--dark::before { display: none; }
 
@@ -244,7 +266,7 @@ p { margin: 0 0 18px; }
 .card {
   position: relative;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(232, 224, 210, 0.28)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(234, 232, 229, 0.28)),
     var(--marble);
   border: 1px solid var(--line);
   border-radius: 3px;
@@ -260,17 +282,17 @@ p { margin: 0 0 18px; }
   pointer-events: none;
   transition: border-color var(--dur) var(--ease);
 }
-.card:hover::after { border-color: rgba(201, 163, 78, 0.5); }
+.card:hover::after { border-color: rgba(var(--accent-rgb), 0.5); }
 
 /* Dark stone card variant */
 .card--stone {
   background:
-    linear-gradient(180deg, rgba(40, 34, 28, 0.9), rgba(21, 21, 21, 0.96)),
+    linear-gradient(180deg, rgba(34, 34, 38, 0.9), rgba(12, 12, 13, 0.96)),
     var(--cathedral);
-  border-color: rgba(201, 163, 78, 0.24);
-  color: rgba(240, 232, 218, 0.82);
+  border-color: rgba(var(--accent-rgb), 0.24);
+  color: rgba(246, 245, 243, 0.82);
 }
-.card--stone h1, .card--stone h2, .card--stone h3, .card--stone h4 { color: var(--ivory); }
+.card--stone h1, .card--stone h2, .card--stone h3, .card--stone h4 { color: var(--white); }
 
 .tilt-glare {
   position: absolute;
@@ -282,16 +304,33 @@ p { margin: 0 0 18px; }
 }
 
 /* Section grounds */
-.section-soft { background: var(--bg-soft); }
+/* ── A BLACK HALL ──
+   Re-points the colour tokens for its whole subtree, so every heading, rule,
+   card and caption inside inverts without a single per-element override. */
+.section-soft {
+  background: var(--bg-soft);
+  --ink: #FFFFFF;
+  --ink-soft: #B7B7BE;
+  --muted: #8A8A93;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.2);
+  --travertine: #17171B;
+  --marble: #131317;
+  --gold-deep: var(--ember-light);   /* the deep tone is unreadable on black */
+  color: var(--ink-soft);
+}
+.section-soft h1, .section-soft h2, .section-soft h3, .section-soft h4 { color: var(--ink); }
+/* the stone tooth has to lift on black, not darken */
+.section-soft::before { background-blend-mode: screen; opacity: 0.5; }
 .section-warm { background: var(--bg-warm); }
 .section-dark {
   background: var(--cathedral);
-  color: rgba(206, 198, 184, 0.85);
+  color: rgba(202, 199, 194, 0.85);
 }
 /* stone materiality is for light halls only */
 .section-dark::before,
 .section-dark::after { display: none; }
-.section-dark h1, .section-dark h2, .section-dark h3, .section-dark h4 { color: var(--ivory); }
+.section-dark h1, .section-dark h2, .section-dark h3, .section-dark h4 { color: var(--white); }
 
 .section-head {
   max-width: 760px;
@@ -323,7 +362,7 @@ p { margin: 0 0 18px; }
   font-size: 13px;
   line-height: 1;
   color: var(--gold);
-  text-shadow: 0 0 12px rgba(201, 163, 78, 0.5);
+  text-shadow: 0 0 12px rgba(var(--accent-rgb), 0.5);
 }
 .orn-rule--sm { width: 108px; margin: 22px auto; }
 .orn-rule--sm::before { font-size: 10px; }
@@ -356,7 +395,7 @@ p { margin: 0 0 18px; }
   font-size: 13px;
   line-height: 1;
   color: var(--gold);
-  text-shadow: 0 0 14px rgba(201, 163, 78, 0.55);
+  text-shadow: 0 0 14px rgba(var(--accent-rgb), 0.55);
 }
 .ornament--sm .ornament__mark { font-size: 10px; }
 
@@ -379,7 +418,7 @@ p { margin: 0 0 18px; }
   padding: clamp(180px, 20vw, 280px) 0 clamp(110px, 11vw, 170px);
   text-align: center;
   background:
-    radial-gradient(1400px 640px at 50% -10%, rgba(201, 163, 78, 0.14), transparent 66%),
+    radial-gradient(1400px 640px at 50% -10%, rgba(var(--accent-rgb), 0.16), transparent 66%),
     linear-gradient(180deg, var(--travertine), var(--ivory));
 }
 .page-hero::before {
@@ -414,7 +453,7 @@ p { margin: 0 0 18px; }
   transform: translate(-50%, -50%);
   font-size: 13px;
   color: var(--gold);
-  text-shadow: 0 0 12px rgba(201, 163, 78, 0.5);
+  text-shadow: 0 0 12px rgba(var(--accent-rgb), 0.5);
 }
 /* Colossal ambient Roman title behind the hero */
 .page-hero__bg-text {
@@ -425,7 +464,7 @@ p { margin: 0 0 18px; }
   font-family: var(--font-display);
   font-size: clamp(140px, 24vw, 360px);
   font-weight: 600;
-  color: rgba(133, 125, 114, 0.1);
+  color: rgba(122, 122, 128, 0.1);
   white-space: nowrap;
   pointer-events: none;
   z-index: 0;
@@ -454,11 +493,11 @@ p { margin: 0 0 18px; }
   color: var(--gold-deep);
   background-image:
     linear-gradient(96deg, var(--gold-deep), var(--gold), var(--gold-light)),
-    linear-gradient(180deg, rgba(201, 163, 78, 0.12), rgba(154, 123, 51, 0.04));
+    linear-gradient(180deg, rgba(var(--accent-rgb), 0.12), rgba(138, 59, 8, 0.04));
   background-repeat: no-repeat;
   background-size: 0% 100%, 100% 100%;
   background-position: left center, center;
-  box-shadow: inset 0 1px 0 rgba(255, 245, 220, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 246, 238, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.18);
   transition: background-size var(--dur-slow) var(--ease), color var(--dur) var(--ease),
     border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease),
     transform var(--dur) var(--ease);
@@ -480,17 +519,17 @@ p { margin: 0 0 18px; }
   border-color: var(--line-strong);
   color: var(--ink);
   background-image:
-    linear-gradient(96deg, var(--gold-deep), var(--gold), var(--gold-light)),
-    linear-gradient(180deg, rgba(232, 224, 210, 0.4), rgba(232, 224, 210, 0.15));
+    linear-gradient(96deg, var(--ember-deep), var(--ember), var(--ember-light)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
 }
 
 /* Outline — for dark grounds; cream label until the gold sheet fills */
 .btn-outline {
-  border-color: rgba(230, 206, 134, 0.5);
-  color: var(--ivory);
+  border-color: rgba(var(--accent-light-rgb), 0.5);
+  color: var(--white);
   background-image:
     linear-gradient(96deg, var(--gold-deep), var(--gold), var(--gold-light)),
-    linear-gradient(180deg, rgba(230, 206, 134, 0.08), rgba(0, 0, 0, 0.06));
+    linear-gradient(180deg, rgba(var(--accent-light-rgb), 0.08), rgba(0, 0, 0, 0.06));
 }
 
 /* ================= STAT ================= */
@@ -548,4 +587,17 @@ p { margin: 0 0 18px; }
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Scroll-scrubbed headings — words lit in sequence as you approach the hall.
+   Normal inline flow (not flex) so the spaces between words survive in
+   textContent for screen readers and copy-paste. */
+.scrub__word {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scrub { display: block; }
+  .scrub__word { opacity: 1 !important; transform: none !important; }
 }

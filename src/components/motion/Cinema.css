@@ -1,0 +1,125 @@
+/* ============ CINEMA — continuous atmosphere over the whole journey ============
+   One fixed plane above the halls but beneath the chrome (header, progress bar).
+   Everything here is transform/opacity only so it never costs a layout. */
+.cinema {
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+  contain: strict;
+}
+
+/* ---- Slow blooms of warm light, breathing out of phase ---- */
+.cinema__bloom {
+  position: absolute;
+  width: 62vw;
+  height: 62vw;
+  border-radius: 50%;
+  /* No blur filter — the radial gradient is already soft, and blurring a
+     62vw plane every frame is the single most expensive thing this file
+     could ask the compositor to do. */
+  will-change: transform, opacity;
+}
+.cinema__bloom--a {
+  top: -18vw;
+  left: -14vw;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.13), transparent 66%);
+  animation: bloom-drift-a 46s ease-in-out infinite alternate;
+}
+.cinema__bloom--b {
+  bottom: -22vw;
+  right: -16vw;
+  background: radial-gradient(circle, rgba(var(--accent-light-rgb), 0.11), transparent 66%);
+  animation: bloom-drift-b 58s ease-in-out infinite alternate;
+}
+@keyframes bloom-drift-a {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(14vw, 10vh, 0) scale(1.22); }
+}
+@keyframes bloom-drift-b {
+  0%   { transform: translate3d(0, 0, 0) scale(1.1); }
+  100% { transform: translate3d(-12vw, -12vh, 0) scale(1); }
+}
+
+/* ---- Vertical light streaks — only visible while the camera travels ---- */
+.cinema__streaks {
+  position: absolute;
+  inset: -10% 0;
+  transform-origin: center;
+  will-change: transform, opacity;
+  /* soft stops rather than a blur filter — same feathering, no re-raster */
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(var(--accent-light-rgb), 0.1) 8%, transparent 18%),
+    linear-gradient(90deg, transparent 26%, rgba(var(--accent-rgb), 0.08) 34%, transparent 43%),
+    linear-gradient(90deg, transparent 60%, rgba(var(--accent-light-rgb), 0.09) 69%, transparent 78%),
+    linear-gradient(90deg, transparent 84%, rgba(var(--accent-rgb), 0.07) 92%, transparent 100%);
+}
+
+/* ---- Gilded embers rising continuously ---- */
+.cinema__embers { position: absolute; inset: 0; }
+.cinema__embers span {
+  position: absolute;
+  bottom: -6vh;
+  border-radius: 50%;
+  background: rgba(var(--accent-rgb), 0.85);
+  box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.55);
+  animation-name: ember-rise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+@keyframes ember-rise {
+  0%   { transform: translate3d(0, 0, 0) scale(0.6); }
+  10%  { transform: translate3d(calc(var(--sway) * 0.2), -12vh, 0) scale(1); }
+  50%  { transform: translate3d(calc(var(--sway) * -0.6), -58vh, 0) scale(0.85); }
+  90%  { transform: translate3d(calc(var(--sway) * 0.5), -100vh, 0) scale(1); }
+  100% { transform: translate3d(calc(var(--sway) * 0.7), -114vh, 0) scale(0.4); }
+}
+
+/* ---- The candle carried through the halls ---- */
+.cinema__candle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 620px;
+  height: 620px;
+  margin: -310px 0 0 -310px;   /* centre on the pointer */
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 232, 208, 0.16) 0%,
+    rgba(var(--accent-light-rgb), 0.09) 26%,
+    rgba(var(--accent-rgb), 0.04) 48%,
+    transparent 70%
+  );
+  will-change: transform;
+}
+/* nothing to follow on touch — and a fixed glow would just sit there */
+@media (pointer: coarse) {
+  .cinema__candle { display: none; }
+}
+
+/* ---- Fine film grain, forever shifting ---- */
+/* No mix-blend-mode here. A blended full-viewport overlay forces the entire
+   page to re-composite on every frame — measured at 2.9fps vs 30fps once the
+   blend was dropped. Plain low-opacity noise reads the same at this strength. */
+.cinema__grain {
+  position: absolute;
+  inset: -120px;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Static, not shifting. An animated viewport-sized noise plane repaints the
+     full screen several times a second for a texture nobody can see move at
+     3.5% opacity — it was the most expensive thing left on the page. */
+}
+
+/* The atmosphere is a luxury, not a requirement — drop it on small screens
+   where the paint cost is least affordable and the effect least visible. */
+@media (max-width: 620px) {
+  .cinema__streaks,
+  .cinema__grain { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinema { display: none; }
+}

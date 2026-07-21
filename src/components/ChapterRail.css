@@ -1,0 +1,95 @@
+/* ======================================================================
+   THE CHAPTER RAIL — a gilded thread in the margin
+   ====================================================================== */
+.crail {
+  position: fixed;
+  top: 50%;
+  left: clamp(18px, 2.4vw, 40px);
+  transform: translateY(-50%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  pointer-events: none;
+  /* held back until the first hall — the hero should stay uninterrupted */
+  opacity: 0;
+  transition: opacity 0.9s var(--ease);
+}
+.crail.is-visible { opacity: 1; }
+
+/* the thread itself, filling as you descend */
+.crail__thread {
+  position: relative;
+  width: 1px;
+  height: clamp(150px, 26vh, 260px);
+  background: rgba(var(--accent-rgb), 0.22);
+  overflow: hidden;
+}
+.crail__thread-fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: top center;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  will-change: transform;
+}
+
+.crail__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: clamp(150px, 26vh, 260px);
+}
+
+.crail__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(122, 122, 128, 0.55);
+  transition: color 0.5s var(--ease);
+}
+.crail__numeral {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  min-width: 2.2ch;
+  transition: color 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+/* the label only surfaces for the chapter you are standing in */
+.crail__label {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  transition: max-width 0.6s var(--ease), opacity 0.5s var(--ease);
+}
+.crail__item.is-active { color: var(--gold-deep); }
+.crail__item.is-active .crail__numeral {
+  color: var(--gold);
+  transform: scale(1.18);
+}
+.crail__item.is-active .crail__label {
+  max-width: 15ch;
+  opacity: 1;
+}
+
+/* Dark halls (Scripture, Prayer) sit behind the rail — lift it there.
+   Applied by the halls themselves via a body-level class would be fragile, so
+   the rail simply uses colours that read on both grounds. */
+@media (max-width: 1180px) {
+  .crail__label { display: none; }
+}
+@media (max-width: 900px) {
+  .crail { display: none; }   /* no margin to spare on a phone */
+}
+@media (prefers-reduced-motion: reduce) {
+  .crail__numeral, .crail__item, .crail__label { transition: none; }
+}

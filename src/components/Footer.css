@@ -1,11 +1,11 @@
 /* ============ FOOTER — the closing scene of the pilgrimage ============ */
 .site-footer {
   position: relative;
-  background: linear-gradient(180deg, #100d0a 0%, var(--cathedral) 55%, #0c0a08 100%);
-  color: rgba(206, 198, 184, 0.7);
+  background: linear-gradient(180deg, #0E0E10 0%, var(--cathedral) 55%, #0A0A0C 100%);
+  color: rgba(202, 199, 194, 0.7);
   margin-top: auto;
   overflow: hidden;
-  border-top: 1px solid rgba(201, 163, 78, 0.3);
+  border-top: 1px solid rgba(var(--accent-rgb), 0.3);
 }
 
 /* candle glow rising from the floor */
@@ -17,7 +17,7 @@
   width: 900px;
   height: 620px;
   pointer-events: none;
-  background: radial-gradient(ellipse at bottom, rgba(201, 163, 78, 0.2) 0%, rgba(201, 163, 78, 0.05) 38%, transparent 70%);
+  background: radial-gradient(ellipse at bottom, rgba(var(--accent-rgb), 0.2) 0%, rgba(var(--accent-rgb), 0.05) 38%, transparent 70%);
   animation: light-breathe 9s ease-in-out infinite;
 }
 
@@ -29,8 +29,8 @@
   width: 2px;
   height: 2px;
   border-radius: 50%;
-  background: rgba(230, 206, 134, 0.7);
-  box-shadow: 0 0 7px rgba(201, 163, 78, 0.7);
+  background: rgba(var(--accent-light-rgb), 0.7);
+  box-shadow: 0 0 7px rgba(var(--accent-rgb), 0.7);
   animation: mote-drift linear infinite;
 }
 .site-footer__motes span:nth-child(1) { left: 34%; animation-duration: 17s; }
@@ -52,14 +52,14 @@
 .site-footer__seal {
   display: block;
   margin: 0 auto 30px;
-  filter: drop-shadow(0 0 22px rgba(201, 163, 78, 0.35));
+  filter: drop-shadow(0 0 22px rgba(var(--accent-rgb), 0.35));
 }
 .site-footer__verse {
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(24px, 3.2vw, 40px);
   line-height: 1.32;
-  color: var(--ivory);
+  color: var(--white);
 }
 .site-footer__ref {
   display: block;
@@ -69,7 +69,7 @@
   font-weight: 600;
   letter-spacing: 0.36em;
   text-transform: uppercase;
-  color: rgba(230, 206, 134, 0.7);
+  color: rgba(var(--accent-light-rgb), 0.7);
 }
 .site-footer__closing .ornament { margin-top: 30px; }
 
@@ -81,14 +81,14 @@
   grid-template-columns: 1.6fr 1fr 1fr;
   gap: 56px;
   padding: clamp(48px, 6vw, 80px) 0 60px;
-  border-top: 1px solid rgba(201, 163, 78, 0.14);
+  border-top: 1px solid rgba(var(--accent-rgb), 0.14);
 }
 
 .site-footer__name {
   display: block;
   font-family: var(--font-display);
   font-size: 24px;
-  color: var(--ivory);
+  color: var(--white);
   margin-bottom: 14px;
 }
 .site-footer__brand p {
@@ -96,7 +96,7 @@
   font-family: var(--font-display);
   font-size: 19px;
   line-height: 1.6;
-  color: rgba(230, 222, 208, 0.8);
+  color: rgba(229, 227, 223, 0.8);
 }
 
 .site-footer h4 {
@@ -118,7 +118,7 @@
 
 .site-footer a,
 .site-footer__links span {
-  color: rgba(206, 198, 184, 0.7);
+  color: rgba(202, 199, 194, 0.7);
   transition: color var(--dur) var(--ease);
 }
 .site-footer a:hover { color: var(--gold-light); }
@@ -135,12 +135,12 @@
 .site-footer__bottom {
   position: relative;
   z-index: 2;
-  border-top: 1px solid rgba(201, 163, 78, 0.14);
+  border-top: 1px solid rgba(var(--accent-rgb), 0.14);
   padding: 24px 0;
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(133, 125, 114, 0.8);
+  color: rgba(122, 122, 128, 0.8);
 }
 .site-footer__bottom-row {
   display: flex;
@@ -152,9 +152,9 @@
 }
 /* a quiet credit line — not a nav item, easy to miss unless you're looking */
 .site-footer__credit {
-  color: rgba(133, 125, 114, 0.55);
+  color: rgba(122, 122, 128, 0.55);
   text-decoration: none;
-  border-left: 1px solid rgba(133, 125, 114, 0.3);
+  border-left: 1px solid rgba(122, 122, 128, 0.3);
   padding-left: 10px;
   transition: color var(--dur) var(--ease);
 }

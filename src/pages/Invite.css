@@ -30,8 +30,8 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(120% 90% at 50% 40%, transparent 24%, rgba(8, 6, 4, 0.6) 100%),
-    linear-gradient(180deg, rgba(8, 6, 4, 0.55) 0%, rgba(8, 6, 4, 0.2) 42%, rgba(8, 6, 4, 0.75) 100%);
+    radial-gradient(120% 90% at 50% 40%, transparent 24%, rgba(6, 6, 7, 0.6) 100%),
+    linear-gradient(180deg, rgba(6, 6, 7, 0.55) 0%, rgba(6, 6, 7, 0.2) 42%, rgba(6, 6, 7, 0.75) 100%);
 }
 .invite-banner__inner {
   position: relative;
@@ -41,7 +41,7 @@
 }
 .invite-banner__inner h1 {
   margin: 0;
-  color: var(--ivory);
+  color: var(--white);
   font-size: clamp(46px, 7vw, 96px);
   letter-spacing: -0.02em;
   text-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
@@ -54,12 +54,12 @@
   margin-top: -130px;              /* overlap up onto the banner */
   padding: clamp(48px, 6vw, 88px) 0 clamp(90px, 11vw, 150px);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(232, 224, 210, 0.25)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(234, 232, 229, 0.25)),
     var(--marble);
-  border-top: 1px solid rgba(201, 163, 78, 0.4);
+  border-top: 1px solid rgba(var(--accent-rgb), 0.4);
   /* a broad arch threshold at the top edge */
   border-radius: 50% 50% 0 0 / 70px 70px 0 0;
-  box-shadow: 0 -40px 90px -50px rgba(20, 16, 10, 0.5);
+  box-shadow: 0 -40px 90px -50px rgba(12, 12, 14, 0.5);
 }
 
 .invite-panel__intro {
@@ -106,19 +106,19 @@
   text-transform: none;
   color: var(--ink);
   padding: 15px 17px;
-  background: rgba(232, 224, 210, 0.42);
+  background: rgba(234, 232, 229, 0.42);
   border: 1px solid var(--line);
   border-radius: 2px;
   transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .invite-form input::placeholder,
-.invite-form textarea::placeholder { color: rgba(90, 78, 59, 0.45); }
+.invite-form textarea::placeholder { color: rgba(70, 68, 64, 0.45); }
 .invite-form input:focus,
 .invite-form textarea:focus {
   outline: none;
   background: #fff;
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(201, 163, 78, 0.14);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.14);
 }
 .invite-form textarea { min-height: 150px; resize: vertical; }
 

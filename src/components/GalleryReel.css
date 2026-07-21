@@ -1,0 +1,185 @@
+/* ======================================================================
+   THE REEL — photographs dealt one at a time into a fixed square frame
+   Transform/opacity only: no blend modes, no animated filters.
+   ====================================================================== */
+.reel {
+  position: relative;
+}
+
+/* the stage holds still in the viewport while the section scrolls past it */
+.reel__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 4vh, 48px);
+}
+
+/* ---- the frame the photographs are set into — this never moves ---- */
+.reel__frame {
+  position: relative;
+  width: clamp(240px, 30vw, 400px);
+  aspect-ratio: 1 / 1;
+}
+
+/* The empty berth the photographs are dealt into. Deliberately NOT clipping:
+   the plates have to be seen crossing the open space and settling onto it, so
+   they travel above this, not inside it. */
+.reel__window {
+  position: absolute;
+  inset: 0;
+  /* Reads as a cut recess. On the old warm-ivory ground a translucent tint was
+     enough; against white it vanished and the waiting berth looked like a
+     broken image box, so it now carries its own stone tone and depth. */
+  /* A cut recess in a black wall: darker than its surround, with a lit lower
+     lip rather than a white one. */
+  background: linear-gradient(180deg, #131317, #0B0B0D);
+  border: 1px solid rgba(var(--accent-rgb), 0.32);
+  box-shadow:
+    inset 0 4px 22px rgba(0, 0, 0, 0.55),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* gilded corner brackets, sitting just outside the window */
+.reel__corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--gold);
+  z-index: 2;
+  pointer-events: none;
+}
+.reel__corner--tl { top: -9px; left: -9px; border-right: 0; border-bottom: 0; }
+.reel__corner--tr { top: -9px; right: -9px; border-left: 0; border-bottom: 0; }
+.reel__corner--bl { bottom: -9px; left: -9px; border-right: 0; border-top: 0; }
+.reel__corner--br { bottom: -9px; right: -9px; border-left: 0; border-top: 0; }
+
+/* ---- the travelling photographs ----
+   Each is a square card the exact size of the berth, so when its transform
+   reaches 0,0 it registers perfectly with the frame. The figure itself does not
+   clip — it carries the cast shadow outside its own bounds. */
+.reel__plate {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  z-index: 1;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* cast shadow — a scaled gradient, never an animated filter */
+.reel__shade {
+  position: absolute;
+  inset: 4% -6% -10%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    56% 46% at 50% 62%,
+    rgba(14, 12, 10, 0.42),
+    rgba(14, 12, 10, 0.14) 52%,
+    transparent 74%
+  );
+  will-change: transform, opacity;
+}
+
+/* the glass — this is what clips the photograph */
+.reel__photo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  border: 1px solid rgba(var(--accent-rgb), 0.5);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 251, 247, 0.16),
+    0 24px 60px -30px rgba(12, 12, 14, 0.5);
+}
+.reel__photo img {
+  /* oversized so the inner parallax never exposes an edge */
+  position: absolute;
+  inset: -7%;
+  width: 114%;
+  height: 114%;
+  object-fit: cover;
+  object-position: center 32%;
+  display: block;
+  will-change: transform;
+}
+
+/* the bar of gold light crossing the glass as the plate registers */
+.reel__flare {
+  position: absolute;
+  top: -30%;
+  left: 0;
+  width: 46%;
+  height: 160%;
+  pointer-events: none;
+  transform: skewX(-16deg);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 251, 247, 0.1) 28%,
+    rgba(255, 246, 238, 0.4) 50%,
+    rgba(255, 251, 247, 0.1) 72%,
+    transparent 100%
+  );
+  will-change: transform, opacity;
+}
+
+/* ---- the counter beneath the frame ---- */
+.reel__meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+.reel__count { min-width: 2ch; text-align: right; font-variant-numeric: tabular-nums; }
+.reel__total { color: var(--muted); }
+.reel__rail {
+  display: block;
+  width: clamp(90px, 12vw, 170px);
+  height: 1px;
+  background: var(--line-strong);
+  overflow: hidden;
+}
+.reel__rail-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  background: var(--gold);
+}
+
+.reel__cta { margin-top: 4px; }
+
+/* ---- reduced motion: no pinning, no sequence, just the photographs ---- */
+.reel--static {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.reel--static .reel__plate {
+  position: relative;
+  inset: auto;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+}
+.reel--static .reel__plate img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 560px) {
+  .reel--static { grid-template-columns: repeat(2, 1fr); }
+  .reel__meta { gap: 12px; letter-spacing: 0.2em; }
+}

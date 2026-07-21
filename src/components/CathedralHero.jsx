@@ -10,6 +10,9 @@ import {
 } from 'framer-motion'
 import Ambient from './motion/Ambient'
 import Ornament from './motion/Ornament'
+import Magnetic from './motion/Magnetic'
+import { site, stats, focusAreas } from '../data/siteContent'
+import prophetCutout from '../assets/images/site/prophet-daniel-bennet.png'
 
 const word = {
   hidden: { opacity: 0, y: 40, filter: 'blur(10px)' },
@@ -41,6 +44,9 @@ function CathedralHero() {
   const bgPy = useTransform(mvy, [-0.5, 0.5], [14, -14])
   const foreX = useTransform(mvx, [-0.5, 0.5], [-48, 48])
   const textX = useTransform(mvx, [-0.5, 0.5], [10, -10])
+  // the figure sits between the plate and the type, so it drifts between them
+  const figureX = useTransform(mvx, [-0.5, 0.5], [26, -26])
+  const figureY = useTransform(scrollYProgress, [0, 1], [0, 60])
 
   function onMove(e) {
     if (reduce) return
@@ -65,6 +71,16 @@ function CathedralHero() {
       {/* 3–5 · volumetric light, drifting fog, dust motes */}
       <Ambient rays dust fog tone="dark" />
 
+      {/* 6a · the messenger himself, standing in the nave — behind the type,
+              graded down so the words keep the light */}
+      <motion.div
+        className="chero__figure"
+        style={reduce ? staticStyle : { y: figureY, x: figureX }}
+        aria-hidden="true"
+      >
+        <img src={prophetCutout} alt="" />
+      </motion.div>
+
       {/* 6 · foreground plane — an out-of-focus stone edge for depth */}
       <motion.div className="chero__fore" style={reduce ? staticStyle : { y: foreY, x: foreX }} aria-hidden="true" />
 
@@ -84,6 +100,10 @@ function CathedralHero() {
             animate={reduce ? undefined : 'show'}
             variants={reduce ? undefined : { show: { transition: { staggerChildren: 0.5, delayChildren: 0.3 } } }}
           >
+            <motion.span className="chero__kicker" variants={reduce ? undefined : word}>
+              {site.founder}
+            </motion.span>
+
             <h1 className="chero__title">
               <motion.span className="chero__word chero__word--1" variants={reduce ? undefined : word}>Encounter</motion.span>
               <motion.span className="chero__word chero__word--2 accent" variants={reduce ? undefined : word}>Christ.</motion.span>
@@ -93,7 +113,49 @@ function CathedralHero() {
               <Ornament center={false} small />
               <span className="chero__ref">Isaiah&nbsp;II&nbsp;·&nbsp;3</span>
             </motion.div>
+
+            {/* what this ministry actually does — the subjects of the work */}
+            <motion.ul className="chero__subjects" variants={reduce ? undefined : word}>
+              {focusAreas.slice(0, 3).map((f) => (
+                <li key={f}><span className="chero__subject-mark" aria-hidden="true" />{f}</li>
+              ))}
+            </motion.ul>
+
+            {/* the two ways in — arriving last, after the scene has settled */}
+            <motion.div className="chero__actions" variants={reduce ? undefined : word}>
+              <Magnetic><Link to="/invite" className="btn btn-outline">Invite the Prophet</Link></Magnetic>
+              <a
+                href={site.social.youtube}
+                target="_blank"
+                rel="noreferrer"
+                className="chero__watch"
+              >
+                <span className="chero__play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="11" height="11">
+                    <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
+                  </svg>
+                </span>
+                Watch
+              </a>
+            </motion.div>
           </motion.div>
+        </div>
+      </motion.div>
+
+      {/* the proof, set quietly along the floor of the nave */}
+      <motion.div
+        className="chero__ledger"
+        initial={reduce ? false : { opacity: 0, y: 20 }}
+        animate={reduce ? undefined : { opacity: 1, y: 0 }}
+        transition={{ delay: 2.2, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="container chero__ledger-row">
+          {stats.map((s) => (
+            <div className="chero__stat" key={s.label}>
+              <span className="chero__stat-num">{s.value}{s.suffix}</span>
+              <span className="chero__stat-label">{s.label}</span>
+            </div>
+          ))}
         </div>
       </motion.div>
 

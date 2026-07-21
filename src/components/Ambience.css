@@ -8,15 +8,15 @@
   gap: 10px;
   padding: 10px 16px 10px 14px;
   border-radius: 2px;
-  border: 1px solid rgba(201, 163, 78, 0.4);
-  background: rgba(21, 21, 21, 0.55);
+  border: 1px solid rgba(var(--accent-rgb), 0.4);
+  background: rgba(10, 10, 11, 0.9);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   color: var(--gold-light);
   cursor: pointer;
   transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
 }
-.ambience:hover { border-color: var(--gold); background: rgba(21, 21, 21, 0.72); }
+.ambience:hover { border-color: var(--gold); background: rgba(10, 10, 11, 0.97); }
 
 .ambience__label {
   font-family: var(--font-sans);

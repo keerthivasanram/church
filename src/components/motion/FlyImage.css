@@ -1,0 +1,70 @@
+/* ============ FLY IMAGE — plates that travel with the scroll ============ */
+.flyimg {
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+}
+
+.flyimg__frame {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+.flyimg__frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- Inset mode ----
+   The tile keeps its place in the layout; the travelling layer inside it is
+   bled past every edge by --fly-overscan so no amount of drift, bank or
+   ken-burns can pull the photograph off its own frame. */
+.flyimg--inset {
+  position: relative;
+  overflow: hidden;
+  transform-style: flat;
+}
+.flyimg--inset > .flyimg__frame {
+  position: absolute;
+  inset: calc(-1 * var(--fly-overscan, 60px));
+  height: auto;
+  overflow: hidden;
+}
+
+/* NOTE — there is deliberately no always-on ken-burns zoom on these
+   photographs. A continuous `transform: scale()` animation over full-size JPEGs
+   forces the compositor to re-rasterise every plate on every frame: measured on
+   this page it cost ~10x the frame budget (1.8fps → 20fps when removed) and was
+   the whole of a 12x scroll regression. The photographs get their movement from
+   the scroll-driven travel below, which composites an already-rastered layer,
+   and the room gets its continuous life from Cinema's embers and blooms. */
+
+/* a bar of gold light wiping across the glass as the plate passes the eye */
+.flyimg__sheen {
+  position: absolute;
+  top: -30%;
+  left: 0;
+  width: 42%;
+  height: 160%;
+  pointer-events: none;
+  transform: skewX(-14deg);
+  /* Soft stops instead of mix-blend-mode + blur: fifteen blended, blurred
+     layers each re-compositing the backdrop cost more than every other effect
+     on this page combined. The feathered gradient reads the same. */
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 251, 247, 0.05) 26%,
+    rgba(255, 251, 247, 0.14) 42%,
+    rgba(var(--accent-light-rgb), 0.22) 50%,
+    rgba(255, 251, 247, 0.14) 58%,
+    rgba(255, 251, 247, 0.05) 74%,
+    transparent 100%
+  );
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flyimg__sheen { display: none; }
+}

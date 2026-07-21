@@ -1,5 +1,10 @@
 /* ============ ULTRA-THIN FLOATING GLASS NAV ============ */
 .site-header {
+  /* a black bar over a white page — invert its palette wholesale */
+  --ink: #FFFFFF;
+  --muted: rgba(255, 255, 255, 0.6);
+  --gold-deep: var(--ember-light);
+  --line: rgba(255, 255, 255, 0.12);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -25,18 +30,18 @@
   margin: 0 auto;
   padding: 0 30px;
   border-radius: 2px;
-  background: rgba(248, 246, 242, 0.55);
-  border: 1px solid rgba(201, 163, 78, 0.18);
-  border-bottom-color: rgba(201, 163, 78, 0.32);
+  background: rgba(10, 10, 11, 0.88);
+  border: 1px solid rgba(var(--accent-rgb), 0.18);
+  border-bottom-color: rgba(var(--accent-rgb), 0.32);
   backdrop-filter: saturate(1.6) blur(26px);
   -webkit-backdrop-filter: saturate(1.6) blur(26px);
-  box-shadow: 0 18px 50px -24px rgba(20, 16, 10, 0.4);
+  box-shadow: 0 18px 50px -24px rgba(12, 12, 14, 0.4);
   transition: height var(--dur) var(--ease), background var(--dur) var(--ease),
     box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 .site-header.is-scrolled .site-header__bar {
   height: 58px;
-  background: rgba(248, 246, 242, 0.72);
+  background: rgba(10, 10, 11, 0.95);
 }
 
 /* Logo */
@@ -100,7 +105,7 @@
   bottom: 4px;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  box-shadow: 0 0 8px rgba(201, 163, 78, 0.6);
+  box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.6);
 }
 
 /* Mobile toggle */
@@ -130,8 +135,8 @@
   max-width: 1320px;
   margin: 8px auto 0;
   border-radius: 2px;
-  background: rgba(248, 246, 242, 0.96);
-  border: 1px solid rgba(201, 163, 78, 0.22);
+  background: rgba(10, 10, 11, 0.97);
+  border: 1px solid rgba(var(--accent-rgb), 0.22);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   box-shadow: var(--shadow-md);

@@ -54,21 +54,35 @@ function Gallery() {
         </div>
       </section>
 
-      <section className="section section-bleed">
-        <div className="container container--bleed">
-          <Stagger className="gallery-grid">
+      <section className="gal-hall">
+        <div className="gal-hall__inner">
+          <div className="gal-ledger">
+            <span>The Wall</span>
+            <span className="gal-ledger__rule" aria-hidden="true" />
+            <span className="gal-ledger__count">
+              {String(galleryImages.length).padStart(2, '0')} Photographs
+            </span>
+          </div>
+
+          <Stagger className="gal-wall">
             {galleryImages.map((img, i) => (
-              <StaggerItem key={img.id} className="gallery-grid__cell">
+              <StaggerItem key={img.id} className="gal-cell">
                 <button
-                  className="gallery-grid__item"
+                  className="gal-frame"
                   onClick={() => setIndex(i)}
-                  aria-label={`Open photo ${img.id}`}
+                  aria-label={`Open photograph ${i + 1} of ${galleryImages.length}`}
                 >
-                  <img src={img.thumb} alt={`Ministry photo ${img.id}`} loading="lazy" />
-                  <span className="gallery-grid__overlay" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3M11 8v6M8 11h6" strokeLinecap="round" />
+                  <img src={img.thumb} alt={`Ministry photograph ${i + 1}`} loading="lazy" />
+                  <span className="gal-frame__wash" aria-hidden="true" />
+                  <span className="gal-frame__index" aria-hidden="true">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="gal-frame__view" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <circle cx="11" cy="11" r="7" />
+                      <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" strokeLinecap="round" />
                     </svg>
+                    View
                   </span>
                 </button>
               </StaggerItem>
@@ -109,7 +123,13 @@ function Gallery() {
               aria-label="Next"
               onClick={(e) => { e.stopPropagation(); next() }}
             >›</button>
-            <span className="lightbox__counter">{index + 1} / {galleryImages.length}</span>
+            <div className="lightbox__bar" onClick={(e) => e.stopPropagation()}>
+              <span><b>{String(index + 1).padStart(2, '0')}</b> / {String(galleryImages.length).padStart(2, '0')}</span>
+              <span className="lightbox__rail" aria-hidden="true">
+                <span style={{ width: `${((index + 1) / galleryImages.length) * 100}%` }} />
+              </span>
+              <span className="lightbox__hint">← → to move · Esc to close</span>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,0 +1,151 @@
+/* ======================================================================
+   THE COLONNADE — a hall of niches carried past a fixed eye
+   Transform/opacity only. No blend modes, no animated filters.
+   ====================================================================== */
+.colonnade {
+  --niche-w: clamp(210px, 21vw, 320px);
+  position: relative;
+}
+
+.colonnade__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;   /* the track runs far wider than the viewport */
+}
+
+.colonnade__track {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(28px, 4vw, 68px);
+  /* pad by half a viewport so the first and last niches can reach the centre */
+  padding-inline: calc((100vw - var(--niche-w)) / 2);
+  will-change: transform;
+}
+
+/* ---- a single niche ---- */
+.colonnade__niche {
+  flex: 0 0 var(--niche-w);
+  width: var(--niche-w);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform, opacity;
+}
+
+/* the recess itself — a wall opening, lit from above */
+.colonnade__recess {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4.4;
+  overflow: hidden;
+  border: 1px solid rgba(var(--accent-rgb), 0.34);
+  /* set into the wall rather than sitting on it */
+  box-shadow:
+    inset 0 14px 34px -18px rgba(12, 10, 8, 0.85),
+    inset 0 -10px 26px -18px rgba(12, 10, 8, 0.6),
+    0 30px 60px -34px rgba(12, 12, 14, 0.5);
+  background: var(--travertine);
+}
+.colonnade__recess img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 34%;
+  display: block;
+}
+
+/* the shaft of light that falls in when the niche reaches the eye */
+.colonnade__light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 244, 236, 0.28) 0%, rgba(255, 244, 236, 0.06) 34%, transparent 62%),
+    radial-gradient(70% 40% at 50% 0%, rgba(var(--accent-light-rgb), 0.34), transparent 70%);
+  will-change: opacity;
+}
+
+/* the icon medallion, hung at the lip of the niche */
+.colonnade__medallion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-top: -23px;
+  border-radius: 50%;
+  background: var(--cathedral);
+  border: 1px solid var(--gold);
+  box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.55);
+  will-change: opacity;
+}
+.colonnade__medallion img {
+  width: 21px;
+  height: 21px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.88;
+}
+
+.colonnade__label {
+  margin-top: 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: clamp(17px, 1.5vw, 23px);
+  color: var(--ink);
+  white-space: nowrap;
+}
+.colonnade__numeral {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  letter-spacing: 0.28em;
+  color: var(--gold-deep);
+}
+
+/* ---- the floor of the hall ---- */
+.colonnade__floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(90px, 14vh, 160px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-strong) 12%, var(--line-strong) 88%, transparent);
+  pointer-events: none;
+}
+.colonnade__floor-light {
+  position: absolute;
+  top: -1px;
+  width: 190px;
+  height: 3px;
+  margin-left: -95px;
+  background: radial-gradient(closest-side, rgba(var(--accent-rgb), 0.95), transparent);
+  will-change: left;
+}
+
+/* ---- reduced motion: no pinning, no travel — just the hall laid out ---- */
+.colonnade--static {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 3vw, 48px);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.colonnade--static .colonnade__niche { flex: none; width: auto; }
+
+@media (max-width: 860px) {
+  .colonnade { --niche-w: clamp(190px, 56vw, 260px); }
+  .colonnade__label { font-size: 16px; }
+  .colonnade--static { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .colonnade--static { grid-template-columns: 1fr; }
+}

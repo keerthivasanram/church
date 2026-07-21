@@ -27,10 +27,10 @@
   transform: skewX(-8deg);
 }
 .ambient--gold .ambient__rays span {
-  background: linear-gradient(180deg, rgba(201, 163, 78, 0.16) 0%, rgba(201, 163, 78, 0.04) 45%, transparent 75%);
+  background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.16) 0%, rgba(var(--accent-rgb), 0.04) 45%, transparent 75%);
 }
 .ambient--dark .ambient__rays span {
-  background: linear-gradient(180deg, rgba(230, 206, 134, 0.2) 0%, rgba(230, 206, 134, 0.05) 45%, transparent 78%);
+  background: linear-gradient(180deg, rgba(var(--accent-light-rgb), 0.2) 0%, rgba(var(--accent-light-rgb), 0.05) 45%, transparent 78%);
 }
 .ambient__rays span:nth-child(1) { left: 4%; animation: light-breathe 11s ease-in-out infinite; }
 .ambient__rays span:nth-child(2) { left: 34%; width: 16%; animation: light-breathe 14s ease-in-out 2s infinite; }
@@ -43,12 +43,12 @@
   height: 70%;
   bottom: 0;
   top: auto;
-  background: radial-gradient(120% 80% at 50% 120%, rgba(240, 232, 218, 0.5), transparent 70%);
+  background: radial-gradient(120% 80% at 50% 120%, rgba(246, 245, 243, 0.5), transparent 70%);
   filter: blur(30px);
   animation: fog-drift 26s ease-in-out infinite alternate;
 }
 .ambient--dark .ambient__fog {
-  background: radial-gradient(120% 80% at 50% 120%, rgba(32, 29, 26, 0.6), transparent 70%);
+  background: radial-gradient(120% 80% at 50% 120%, rgba(22, 22, 26, 0.6), transparent 70%);
 }
 
 /* ---- Drifting dust / incense motes ---- */
@@ -57,8 +57,8 @@
   width: 2px;
   height: 2px;
   border-radius: 50%;
-  background: rgba(230, 206, 134, 0.7);
-  box-shadow: 0 0 6px rgba(201, 163, 78, 0.6);
+  background: rgba(var(--accent-light-rgb), 0.7);
+  box-shadow: 0 0 6px rgba(var(--accent-rgb), 0.6);
   animation: mote-drift linear infinite;
 }
 .ambient__dust span:nth-child(1)  { left: 8%;  top: 78%; animation-duration: 20s; animation-delay: 0s; }

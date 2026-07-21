@@ -14,7 +14,7 @@
   position: relative;
   border-radius: 50% 50% 3px 3px / 16% 16% 3px 3px;
   overflow: hidden;
-  border: 1px solid rgba(201, 163, 78, 0.35);
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
   box-shadow: var(--shadow-lg);
   width: 115%; /* Break out of column constraints */
   max-width: 650px;
@@ -29,8 +29,8 @@
   z-index: 3;
   padding: 80px 100px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(232, 224, 210, 0.28)),
-    var(--marble);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
+    var(--travertine);
   box-shadow: var(--shadow-md);
   margin-left: -80px; /* The crossover overlap */
   margin-top: 60px;
@@ -64,21 +64,21 @@
   gap: 20px;
   padding: clamp(32px, 4vw, 48px) 20px;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(24, 24, 28, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(24px) saturate(1.5);
   -webkit-backdrop-filter: blur(24px) saturate(1.5);
   box-shadow: 
-    0 50px 100px -20px rgba(0,0,0,0.12),
-    0 10px 30px -10px rgba(0,0,0,0.05),
-    inset 0 0 0 1px rgba(255,255,255,0.5);
+    0 50px 100px -20px rgba(0,0,0,0.6),
+    0 10px 30px -10px rgba(0,0,0,0.4),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
   transform: translateY(-50px); /* Crossover into previous section */
   margin-bottom: -50px;
   position: relative;
   z-index: 10;
 }
 .about-stats .stat + .stat {
-  border-left: 1px solid rgba(0,0,0,0.08);
+  border-left: 1px solid rgba(255,255,255,0.09);
 }
 
 /* pillars */
@@ -88,8 +88,8 @@
 .pillar-card {
   position: relative;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(232, 224, 210, 0.28)),
-    var(--marble);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
+    var(--travertine);
   border: 1px solid var(--line);
   border-radius: 3px;
   padding: 44px 34px 36px;
@@ -98,7 +98,7 @@
 }
 .pillar-card:hover {
   box-shadow: var(--shadow-md);
-  border-color: rgba(201, 163, 78, 0.5);
+  border-color: rgba(var(--accent-rgb), 0.5);
 }
 .pillar-card__num {
   font-family: var(--font-display);

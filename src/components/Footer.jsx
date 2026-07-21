@@ -20,8 +20,8 @@ function Footer() {
             <svg viewBox="0 0 64 64" width="54" height="54">
               <defs>
                 <linearGradient id="ft-gold" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stopColor="#E6CE86" />
-                  <stop offset="1" stopColor="#9A7B33" />
+                  <stop offset="0" stopColor="var(--accent-light)" />
+                  <stop offset="1" stopColor="var(--accent-deep)" />
                 </linearGradient>
               </defs>
               <circle cx="32" cy="32" r="30" fill="none" stroke="url(#ft-gold)" strokeWidth="1" opacity="0.7" />
