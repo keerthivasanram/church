@@ -11,7 +11,7 @@ import './Threshold.css'
  * `tone`: 'light' (between ivory halls) | 'dark' (inside shadowed rooms)
  */
 const GROUND = {
-  ivory: 'var(--ivory)',
+  ivory: 'transparent',
   soft: 'var(--bg-soft)',
   dark: 'var(--cathedral)',
 }

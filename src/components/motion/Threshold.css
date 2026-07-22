@@ -7,7 +7,14 @@
   align-items: center;
   justify-content: center;
   /* dissolves one hall's ground into the next — no hard seam */
-  background: linear-gradient(180deg, var(--th-from, var(--ivory)) 0%, var(--th-to, var(--ivory)) 100%);
+  background: linear-gradient(
+    180deg, 
+    var(--th-from, transparent) 0%, 
+    color-mix(in srgb, var(--th-from, transparent) 80%, var(--th-to, transparent) 20%) 25%,
+    color-mix(in srgb, var(--th-from, transparent) 50%, var(--th-to, transparent) 50%) 50%,
+    color-mix(in srgb, var(--th-from, transparent) 20%, var(--th-to, transparent) 80%) 75%,
+    var(--th-to, transparent) 100%
+  );
 }
 
 /* travelling shaft of light */

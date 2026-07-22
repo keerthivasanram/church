@@ -1,0 +1,97 @@
+/* ======================================================================
+   THE COLLAGE — photographs fly in from offscreen to form a mismatched grid
+   ====================================================================== */
+.collage {
+  position: relative;
+  /* Extra height provides scroll distance for the animation to unfold */
+  height: 250vh; 
+}
+
+/* The sticky container that holds the screen while we scroll */
+.collage__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Prevent offscreen items from causing horizontal scroll */
+}
+
+.collage__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* 2 rows of photos + 1 small CTA row, all fitting inside the viewport */
+  grid-template-rows: 1fr 1fr auto;
+  width: 100%;
+  height: 80vh;
+  max-width: 1100px;
+  gap: 0;
+  /* Add perspective so the 3D rotations pop */
+  perspective: 1200px;
+}
+
+.collage__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  will-change: transform, opacity;
+  z-index: 1;
+}
+
+.collage__item:hover {
+  z-index: 10 !important;
+}
+
+.collage__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Clean auto-placed grid — no overlaps */
+.collage__item--0,
+.collage__item--1,
+.collage__item--2,
+.collage__item--3,
+.collage__item--4,
+.collage__item--5 {
+  grid-column: auto;
+  grid-row: auto;
+  z-index: 1;
+}
+
+.collage__cta-box {
+  grid-column: 1 / -1;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: none;
+  border-radius: 0;
+  background: rgba(18, 16, 14, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+@media (max-width: 768px) {
+  .collage__grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 1fr 1fr auto;
+    height: 75vh;
+  }
+  .collage__cta-box {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .collage__grid {
+    grid-template-columns: 1fr 1fr;
+    height: 65vh;
+  }
+}

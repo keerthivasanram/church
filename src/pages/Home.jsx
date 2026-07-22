@@ -10,14 +10,13 @@ import Reveal from '../components/motion/Reveal'
 import { Stagger, StaggerItem } from '../components/motion/Stagger'
 import Ambient from '../components/motion/Ambient'
 import Ornament from '../components/motion/Ornament'
-import Threshold from '../components/motion/Threshold'
 import Cinema from '../components/motion/Cinema'
 import FlyImage from '../components/motion/FlyImage'
 import Drift from '../components/motion/Drift'
 import Magnetic from '../components/motion/Magnetic'
 import ChapterRail from '../components/ChapterRail'
 import Colonnade from '../components/Colonnade'
-import GalleryReel from '../components/GalleryReel'
+import GalleryCollage from '../components/GalleryCollage'
 import SectionHeading from '../components/SectionHeading'
 import Counter from '../components/Counter'
 import Arrow from '../components/Arrow'
@@ -43,10 +42,20 @@ function Home() {
         {/* ═══════════════ HERO — THE NAVE ═══════════════ */}
         <CathedralHero />
 
-        <Threshold tone="dark" from="dark" to="ivory" />
-
         {/* ═══════════════ THE PROPHET ═══════════════ */}
-        <section className="section hprophet" data-chapter="I" data-chapter-label="The Messenger">
+        <section className="section hprophet manuscript-section" data-chapter="I" data-chapter-label="The Messenger">
+          <div className="manuscript-bg" aria-hidden="true">
+            <div className="manuscript-bg__initial" data-depth="0.1">D</div>
+            <div className="manuscript-bg__text manuscript-bg__text--top" data-depth="0.2">ET VERBUM CARO<br/>FACTUM EST</div>
+            <div className="manuscript-bg__text manuscript-bg__text--bottom" data-depth="0.15">IN PRINCIPIO<br/>ERAT VERBUM<br/>ET VERBUM ERAT<br/>APUD DEUM</div>
+            <div className="manuscript-bg__initial manuscript-bg__initial--bottom" data-depth="0.1">ERBUM</div>
+            
+            <div className="manuscript-bg__ornament manuscript-bg__ornament--tl"></div>
+            <div className="manuscript-bg__ornament manuscript-bg__ornament--tr"></div>
+            <div className="manuscript-bg__ornament manuscript-bg__ornament--bl"></div>
+            <div className="manuscript-bg__ornament manuscript-bg__ornament--br"></div>
+            <Ambient rays dust tone="gold" />
+          </div>
           <div className="container hprophet__grid">
             <div className="hprophet__figure">
               <FlyImage
@@ -87,8 +96,6 @@ function Home() {
           </div>
         </section>
 
-        <Threshold tone="dark" from="dark" to="ivory" />
-
         {/* ═══════════════ GLOBAL MINISTRY ═══════════════ */}
         <section className="section hglobal" data-chapter="III" data-chapter-label="The Mission">
           <div className="container hglobal__grid">
@@ -121,8 +128,6 @@ function Home() {
           </div>
         </section>
 
-        <Threshold from="ivory" to="soft" />
-
         {/* ═══════════════ THE MINISTRIES — THE HALLS ═══════════════ */}
         <section className="section section-soft hmin" data-chapter="IV" data-chapter-label="The Work">
           <div className="container">
@@ -133,8 +138,6 @@ function Home() {
           {/* full-bleed: the hall has to run past the edges of the page */}
           <Colonnade items={ministries} />
         </section>
-
-        <Threshold from="soft" to="ivory" />
 
         {/* ═══════════════ TESTIMONIES ═══════════════ */}
         <section className="section htest" data-chapter="V" data-chapter-label="The Witness">
@@ -165,13 +168,11 @@ function Home() {
           </div>
         </section>
 
-        <Threshold from="ivory" to="soft" />
-
         {/* ═══════════════ GALLERY ═══════════════ */}
         <section className="section section-soft hgal" data-chapter="VI" data-chapter-label="Remembrance">
           <div className="container">
             <SectionHeading eyebrow={<><em className="chapter">VI</em> Remembrance</>} title="From the Meetings" />
-            <GalleryReel images={previewImages} />
+            <GalleryCollage images={previewImages} />
           </div>
         </section>
 

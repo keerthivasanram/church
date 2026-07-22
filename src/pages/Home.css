@@ -2,8 +2,11 @@
    HOME — a walk through the basilica
    ====================================================================== */
 .home {
-  margin-top: -84px;
-  background: var(--ivory);
+  background-color: #F8F5EF; /* Warm ivory base */
+  background-image: url('../assets/images/site/paper-texture.png');
+  background-size: 600px;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
 }
 
 /* ═══════════════ HERO — THE NAVE (volumetric, layered) ═══════════════ */
@@ -329,6 +332,94 @@
   color: var(--white); border: 1px solid var(--gold);
 }
 
+/* ═══════════════ LAYERED MANUSCRIPT BACKGROUND ═══════════════ */
+.manuscript-section {
+  position: relative;
+  /* Now handled completely by .section in index.css */
+}
+
+.manuscript-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Faint, oversized background typography */
+.manuscript-bg__initial {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 60vw;
+  line-height: 0.7;
+  /* Make the D more visible and polished with a subtle letterpress shadow */
+  color: rgba(199, 91, 18, 0.08); 
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.4), -1px -1px 0 rgba(0,0,0,0.02);
+  top: -10%;
+  left: -2%;
+  user-select: none;
+}
+.manuscript-bg__initial--bottom {
+  font-size: 20vw;
+  top: auto;
+  bottom: -5%;
+  left: auto;
+  right: -2%;
+}
+
+.manuscript-bg__text {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 4vw;
+  line-height: 1.2;
+  color: rgba(199, 91, 18, 0.06);
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: right;
+  user-select: none;
+}
+.manuscript-bg__text--top {
+  top: 10%;
+  right: 10%;
+}
+.manuscript-bg__text--bottom {
+  top: auto;
+  bottom: 10%;
+  left: 10%;
+  text-align: left;
+}
+
+/* Corner Ornaments */
+.manuscript-bg__ornament {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-image: url('../assets/images/site/corner-ornament.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+}
+.manuscript-bg__ornament--tl {
+  top: 30px;
+  left: 30px;
+}
+.manuscript-bg__ornament--tr {
+  top: 30px;
+  right: 30px;
+  transform: scaleX(-1);
+}
+.manuscript-bg__ornament--bl {
+  bottom: 30px;
+  left: 30px;
+  transform: scaleY(-1);
+}
+.manuscript-bg__ornament--br {
+  bottom: 30px;
+  right: 30px;
+  transform: scale(-1, -1);
+}
+
 /* ═══════════════ THE PROPHET ═══════════════ */
 .hprophet__grid {
   display: grid;
@@ -365,22 +456,31 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
-.hprophet__text h2 { margin-bottom: 24px; }
-.hprophet__text p { color: var(--ink-soft); margin-bottom: 18px; }
-.hprophet__text .btn { margin-top: 12px; }
+.hprophet__text h2 { 
+  margin-bottom: 24px; 
+  font-size: clamp(48px, 5.5vw, 78px); 
+  line-height: 1.1;
+}
+.hprophet__text p { 
+  color: var(--ink-soft); 
+  margin-bottom: 22px; 
+  font-size: 16px;
+  line-height: 1.7;
+}
+.hprophet__text .btn { margin-top: 16px; }
 
 /* ═══════════════ SCRIPTURE — THE APSE ═══════════════ */
 .hscripture {
   position: relative;
   overflow: hidden;
-  margin-top: -60px;
-  padding: clamp(150px, 18vw, 240px) 0 clamp(120px, 15vw, 210px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 0;
   background:
     radial-gradient(120% 100% at 50% 0%, rgba(90, 36, 8, 0.35), transparent 60%),
     linear-gradient(180deg, var(--cathedral-2), var(--cathedral));
-  /* a broad arch threshold — entering another room */
-  border-radius: 50% 50% 0 0 / 90px 90px 0 0;
-  border-top: 1px solid rgba(var(--accent-rgb), 0.4);
 }
 /* light at the apex of the arch */
 .hscripture::before {
@@ -589,13 +689,13 @@
 .hprayer {
   position: relative;
   overflow: hidden;
-  margin-top: -60px;
-  padding: clamp(150px, 18vw, 240px) 0 clamp(120px, 15vw, 210px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 0;
   background: var(--cathedral);
   text-align: center;
-  /* a broad arch threshold — the final hall */
-  border-radius: 50% 50% 0 0 / 90px 90px 0 0;
-  border-top: 1px solid rgba(var(--accent-rgb), 0.4);
 }
 .hprayer__bg {
   position: absolute;
@@ -625,7 +725,6 @@
   .htest__grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 860px) {
-  .home { margin-top: -72px; }
   .hprophet__grid,
   .hglobal__grid { grid-template-columns: 1fr; gap: 48px; }
   .hprophet__figure { order: -1; max-width: 460px; margin: 0 auto; }
