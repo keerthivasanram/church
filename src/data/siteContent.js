@@ -65,6 +65,7 @@ export const ministries = [
 
 export const invite = {
   title: 'Invite Prophet Daniel Bennet',
+  email: 'prophetdanielbennet@gmail.com',
   intro:
     'Thank you for considering Prophet Daniel Bennet to speak at your church or event. He is a vessel through which God transforms, revolutionizes, and revives lives wherever he goes around the globe.',
 }

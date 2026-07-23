@@ -13,6 +13,7 @@ const initial = { name: '', email: '', subject: '', message: '', status: '' }
 function Contact() {
   const [form, setForm] = useState(initial)
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState(false)
 
   function update(field) {
     return (e) => setForm((f) => ({ ...f, [field]: e.target.value }))
@@ -20,10 +21,38 @@ function Contact() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    setForm({ ...form, status: 'submitting' })
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setForm({ name: '', email: '', subject: '', message: '', status: 'success' })
-    setSent(true)
+    setForm((f) => ({ ...f, status: 'submitting' }))
+    setSent(false)
+    setError(false)
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/etpm2020forchrist@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          _subject: form.subject || `Contact Message from ${form.name}`,
+          message: form.message,
+          _captcha: 'false',
+        }),
+      })
+
+      if (response.ok) {
+        setForm({ name: '', email: '', subject: '', message: '', status: 'success' })
+        setSent(true)
+      } else {
+        setError(true)
+        setForm((f) => ({ ...f, status: 'error' }))
+      }
+    } catch (err) {
+      console.error(err)
+      setError(true)
+      setForm((f) => ({ ...f, status: 'error' }))
+    }
   }
 
   return (
@@ -115,7 +144,18 @@ function Contact() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
                       >
-                        Thank you — your message has been received.
+                        Thank you — your message has been sent directly to our email!
+                      </motion.p>
+                    )}
+                    {error && (
+                      <motion.p
+                        className="fform__error"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        style={{ color: '#a93226', textAlign: 'right', marginTop: '6px', fontWeight: 600, fontSize: '14px' }}
+                      >
+                        Something went wrong. Please try again or email us directly at etpm2020forchrist@gmail.com.
                       </motion.p>
                     )}
                   </AnimatePresence>

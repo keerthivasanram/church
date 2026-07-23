@@ -24,6 +24,7 @@ const initial = {
 function Invite() {
   const [form, setForm] = useState(initial)
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState(false)
 
   function update(field) {
     return (e) => setForm((f) => ({ ...f, [field]: e.target.value }))
@@ -31,10 +32,44 @@ function Invite() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    setForm({ ...form, status: 'submitting' })
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setForm({ ...initial, status: 'success' })
-    setSent(true)
+    setForm((f) => ({ ...f, status: 'submitting' }))
+    setSent(false)
+    setError(false)
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${invite.email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `Invitation Request from ${form.name}`,
+          name: form.name,
+          church: form.church,
+          venue: form.venue,
+          email: form.email,
+          phone: form.phone,
+          startDate: form.startDate,
+          endDate: form.endDate,
+          country: form.country,
+          details: form.details,
+          _captcha: 'false',
+        }),
+      })
+
+      if (response.ok) {
+        setForm({ ...initial, status: 'success' })
+        setSent(true)
+      } else {
+        setError(true)
+        setForm((f) => ({ ...f, status: 'error' }))
+      }
+    } catch (err) {
+      console.error(err)
+      setError(true)
+      setForm((f) => ({ ...f, status: 'error' }))
+    }
   }
 
   return (
@@ -124,7 +159,18 @@ function Invite() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                   >
-                    Thank you — your invitation request has been received.
+                    Thank you — your invitation request has been sent directly to our email!
+                  </motion.p>
+                )}
+                {error && (
+                  <motion.p
+                    className="invite-form__error"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    style={{ color: '#a93226', textAlign: 'right', marginTop: '6px', fontWeight: 600, fontSize: '14px' }}
+                  >
+                    Something went wrong. Please try again or contact us directly at {invite.email}.
                   </motion.p>
                 )}
               </AnimatePresence>
