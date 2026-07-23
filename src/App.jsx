@@ -6,6 +6,7 @@ import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
 import Invite from './pages/Invite'
 import Studio from './pages/Studio'
+import Brochure from './pages/Brochure'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/invite" element={<Invite />} />
+        <Route path="/brochure" element={<Brochure />} />
         {/* Not linked from the main nav — a case-study route for the agency,
             reachable only via the quiet credit line in the footer. */}
         <Route path="/studio" element={<Studio />} />

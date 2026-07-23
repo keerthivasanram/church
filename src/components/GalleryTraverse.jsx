@@ -7,8 +7,7 @@ import './GalleryTraverse.css'
 
 function TraverseCard({ img, index, cameraZ }) {
   // Each card is placed deeper into the screen (-Z space).
-  // The first card starts at -1500px, the next at -2900px, etc.
-  const baseZ = -1400 * index - 1500
+  const baseZ = -950 * index - 1000
   
   // The card's current Z position relative to the moving camera
   const z = useTransform(cameraZ, (val) => baseZ - val)
@@ -23,23 +22,19 @@ function TraverseCard({ img, index, cameraZ }) {
   const rotateY = isLeft ? 15 : -15
   const rotateZ = isLeft ? -1.5 : 1.5
 
-  // Optical fading: 
-  // -4500: Deep space (invisible)
-  // -3000: Solidifies
-  //  200: Reaches camera lens
-  //  800: Blown past the camera (invisible)
-  const opacity = useTransform(z, [-4500, -3000, 200, 800], [0, 1, 1, 0])
+  // Optical fading:
+  const opacity = useTransform(z, [-3500, -2200, 200, 700], [0, 1, 1, 0])
   
   // Depth of field blur
-  const blur = useTransform(z, [-4500, -2800, -200, 800], [15, 0, 0, 25])
+  const blur = useTransform(z, [-3500, -2000, -200, 700], [12, 0, 0, 20])
   const filter = useTransform(blur, (v) => `blur(${v}px) contrast(1.08) brightness(0.92)`)
 
   // Cinematic glare sweep as the card rushes past the camera
-  const glareOpacity = useTransform(z, [-2500, -800, 0], [0, 0.45, 0])
-  const glareX = useTransform(z, [-2500, 0], ['-150%', '150%'])
+  const glareOpacity = useTransform(z, [-2000, -600, 0], [0, 0.45, 0])
+  const glareX = useTransform(z, [-2000, 0], ['-150%', '150%'])
 
   // Internal image parallax: as the frame comes forward, the photo pushes back
-  const imgScale = useTransform(z, [-3000, 800], [1.15, 1])
+  const imgScale = useTransform(z, [-2500, 600], [1.15, 1])
 
   return (
     <motion.figure
@@ -54,7 +49,7 @@ function TraverseCard({ img, index, cameraZ }) {
         filter,
       }}
     >
-      <div className="traverse__frame arch">
+      <div className="traverse__frame">
         <motion.img 
           src={img.thumb} 
           alt={`Sacred moment ${img.id}`} 
@@ -81,7 +76,7 @@ function GalleryTraverse({ images }) {
   const reduce = useReducedMotion()
   const displayImages = images.slice(0, 6)
 
-  // Track raw scroll progress over the 400vh section
+  // Track raw scroll progress over the section
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end end'],
@@ -89,20 +84,20 @@ function GalleryTraverse({ images }) {
 
   // Apply a smooth spring to the scroll progress for buttery, cinematic camera movement
   const smoothProgress = useSpring(scrollYProgress, { 
-    stiffness: 80, 
+    stiffness: 85, 
     damping: 24, 
     restDelta: 0.001 
   })
 
-  // Map progress (0 to 1) to camera Z travel (0 to -9000px deep into the screen)
-  const cameraZ = useTransform(smoothProgress, [0, 1], [0, -9000])
+  // Map progress (0 to 1) to camera Z travel smoothly
+  const cameraZ = useTransform(smoothProgress, [0, 1], [0, -6200])
 
-  // Final CTA reveals at the very end of the corridor
-  const ctaOpacity = useTransform(smoothProgress, [0.85, 0.95], [0, 1])
-  const ctaScale = useTransform(smoothProgress, [0.85, 0.95], [0.8, 1])
-  const ctaPointerEvents = useTransform(smoothProgress, (v) => (v > 0.85 ? 'auto' : 'none'))
+  // Final CTA reveals at the end of the corridor
+  const ctaOpacity = useTransform(smoothProgress, [0.72, 0.88], [0, 1])
+  const ctaScale = useTransform(smoothProgress, [0.72, 0.88], [0.8, 1])
+  const ctaPointerEvents = useTransform(smoothProgress, (v) => (v > 0.72 ? 'auto' : 'none'))
 
-  const hintOpacity = useTransform(smoothProgress, [0, 0.1], [1, 0])
+  const hintOpacity = useTransform(smoothProgress, [0, 0.12], [1, 0])
 
   if (reduce) {
     return (

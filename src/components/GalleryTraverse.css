@@ -4,8 +4,8 @@
 .traverse {
   position: relative;
   width: 100%;
-  /* 400vh gives plenty of scroll distance to "walk through" all 6 photos */
-  height: 400vh;
+  /* Reduced height to keep scroll animation tight within section without empty gaps */
+  height: 160vh;
 }
 
 /* Pinned Stage */
@@ -44,12 +44,12 @@
   transform-style: preserve-3d;
 }
 
-/* The Arch Frame */
+/* The Arch Frame — updated to 50px border-radius on all sides */
 .traverse__frame {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 200px 200px 4px 4px / 120px 120px 4px 4px;
+  border-radius: 50px !important;
   overflow: hidden;
   border: 1px solid rgba(var(--gold-rgb), 0.25);
   box-shadow:
@@ -155,7 +155,7 @@
 .traverse--static .traverse__static-card {
   width: 100%;
   aspect-ratio: 3 / 4;
-  border-radius: 120px 120px 4px 4px / 60px 60px 4px 4px;
+  border-radius: 50px !important;
   overflow: hidden;
   border: 1px solid rgba(var(--gold-rgb), 0.3);
 }

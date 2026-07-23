@@ -1,0 +1,309 @@
+/* Brochure & Posters Page Styles */
+.brochure-hall {
+  padding: 60px 0 120px;
+}
+
+.brochure-ledger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 32px;
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--line-subtle);
+  flex-wrap: wrap;
+}
+
+.brochure-ledger__left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.brochure-ledger__rule {
+  width: 40px;
+  height: 1px;
+  background: var(--gold-deep);
+  opacity: 0.5;
+}
+
+.brochure-ledger__count {
+  color: var(--muted);
+}
+
+.brochure-back-btn {
+  padding: 10px 24px;
+  font-size: 10px;
+}
+
+/* Grid Layout */
+.brochure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 36px;
+}
+
+.brochure-card-wrapper {
+  height: 100%;
+}
+
+.brochure-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: rgba(25, 14, 10, 0.45);
+  border: 1px solid rgba(var(--accent-light-rgb), 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.brochure-card:hover {
+  border-color: rgba(var(--accent-light-rgb), 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), var(--shadow-gold);
+}
+
+.brochure-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: #000;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  display: block;
+}
+
+.brochure-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brochure-card:hover .brochure-frame img {
+  transform: scale(1.05);
+}
+
+.brochure-frame__wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(10, 5, 3, 0.85) 100%);
+  opacity: 0.6;
+  transition: opacity var(--dur) var(--ease);
+}
+
+.brochure-card:hover .brochure-frame__wash {
+  opacity: 0.9;
+}
+
+.brochure-frame__view {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(20, 10, 8, 0.85);
+  border: 1px solid var(--gold-deep);
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.brochure-card:hover .brochure-frame__view {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.brochure-card__info {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.brochure-card__tag {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.brochure-card__title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--white);
+  margin: 0 0 20px;
+}
+
+.brochure-card__download {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  text-decoration: none;
+  transition: color var(--dur) var(--ease);
+}
+
+.brochure-card__download:hover {
+  color: var(--white);
+}
+
+/* Lightbox Modal */
+.brochure-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(10, 5, 3, 0.94);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.brochure-lightbox__close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--dur) var(--ease);
+}
+
+.brochure-lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.brochure-lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(20, 10, 8, 0.8);
+  border: 1px solid var(--gold-deep);
+  color: var(--gold-light);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.brochure-lightbox__nav:hover {
+  background: var(--gold-deep);
+  color: var(--cathedral);
+}
+
+.brochure-lightbox__nav--prev { left: 32px; }
+.brochure-lightbox__nav--next { right: 32px; }
+
+.brochure-lightbox__stage {
+  max-width: 900px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  background: rgba(18, 9, 6, 0.95);
+  border: 1px solid var(--gold-deep);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), var(--shadow-gold);
+}
+
+.brochure-lightbox__stage img {
+  max-height: 68vh;
+  width: auto;
+  object-fit: contain;
+  background: #050201;
+}
+
+.brochure-lightbox__caption {
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid var(--line-subtle);
+  background: rgba(12, 6, 4, 0.95);
+  flex-wrap: wrap;
+}
+
+.brochure-lightbox__tag {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.brochure-lightbox__caption h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  margin: 4px 0 0;
+  color: var(--white);
+}
+
+.brochure-lightbox__actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.brochure-lightbox__dl {
+  padding: 10px 20px;
+  font-size: 10px;
+}
+
+.brochure-lightbox__counter {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+@media (max-width: 768px) {
+  .brochure-lightbox__nav--prev { left: 12px; }
+  .brochure-lightbox__nav--next { right: 12px; }
+  .brochure-grid { grid-template-columns: 1fr; }
+}

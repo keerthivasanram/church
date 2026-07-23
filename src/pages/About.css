@@ -133,3 +133,52 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Brown Parchment Paper Background for Vision & Mission section */
+.about-vision-paper {
+  position: relative;
+  background: url('../assets/images/site/parchment-bg.jpg') center / cover no-repeat;
+  color: #2C1E12;
+  padding: 100px 0;
+  border-top: 1px solid rgba(138, 59, 8, 0.2);
+}
+
+.about-vision-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 30, 18, 0.12);
+  pointer-events: none;
+}
+
+.about-vision-paper .section-heading__eyebrow {
+  color: #8A3B08 !important;
+}
+
+.about-vision-paper .section-heading__title {
+  color: #1F140C !important;
+}
+
+.about-vision-paper .pillar-card {
+  background: rgba(255, 248, 238, 0.88);
+  border: 1px solid rgba(138, 59, 8, 0.25);
+  box-shadow: 0 10px 30px rgba(44, 30, 18, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.about-vision-paper .pillar-card:hover {
+  border-color: #8A3B08;
+  box-shadow: 0 16px 40px rgba(44, 30, 18, 0.22);
+}
+
+.about-vision-paper .pillar-card__num {
+  color: #8A3B08;
+}
+
+.about-vision-paper .pillar-card h3 {
+  color: #1F140C;
+}
+
+.about-vision-paper .pillar-card p {
+  color: #4A3525;
+}

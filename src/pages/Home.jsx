@@ -4,6 +4,7 @@ import founderImg from '../assets/images/site/about-founder.jpg'
 import outreachImg from '../assets/images/site/outreach.jpg'
 import internationalImg from '../assets/images/site/international.jpg'
 import malaysiaImg from '../assets/images/site/malaysia-outreach.jpg'
+import brochureFlyerImg from '../assets/images/posters/WhatsApp Image 2026-07-23 at 16.51.15.jpeg'
 import { site, aboutUs, ministries, stats, testimonials } from '../data/siteContent'
 import { galleryImages } from '../data/gallery'
 import Reveal from '../components/motion/Reveal'
@@ -115,22 +116,31 @@ function Home() {
                   </div>
                 ))}
               </div>
+              <div style={{ marginTop: '36px' }}>
+                <Magnetic>
+                  <Link to="/brochure" className="btn btn-primary">
+                    View Ministry Brochure <Arrow />
+                  </Link>
+                </Magnetic>
+              </div>
             </Drift>
             <div className="hglobal__gallery">
               <div className="hglobal__col">
-                <FlyImage className="hglobal__img arch" src={internationalImg} alt="International crusade" from="right" speed={62} />
+                <FlyImage className="hglobal__img" src={internationalImg} alt="International crusade" from="right" speed={62} />
+                <FlyImage className="hglobal__img" src={brochureFlyerImg} alt="Ministry brochure crusade" from="right" speed={30} depth={0.85} />
               </div>
               <div className="hglobal__col hglobal__col--low">
-                <FlyImage className="hglobal__img arch" src={outreachImg} alt="Outreach ministry" from="right" speed={-32} depth={0.8} />
-                <FlyImage className="hglobal__img arch" src={malaysiaImg} alt="Malaysia mission" from="right" speed={-68} depth={0.9} />
+                <FlyImage className="hglobal__img" src={outreachImg} alt="Outreach ministry" from="right" speed={-32} depth={0.8} />
+                <FlyImage className="hglobal__img" src={malaysiaImg} alt="Malaysia mission" from="right" speed={-68} depth={0.9} />
               </div>
             </div>
           </div>
         </section>
 
         {/* ═══════════════ THE MINISTRIES — THE HALLS ═══════════════ */}
-        <section className="section section-soft hmin" data-chapter="IV" data-chapter-label="The Work">
-          <div className="container">
+        <section className="section section-soft hmin section-scripture-bg" data-chapter="IV" data-chapter-label="The Work">
+          <Ambient rays dust tone="dark" />
+          <div className="container" style={{ position: 'relative', zIndex: 10 }}>
             <SectionHeading eyebrow={<><em className="chapter">IV</em> The Work</>} title="Halls of Ministry">
               Serving the body of Christ through prayer, teaching, outreach and discipleship.
             </SectionHeading>
@@ -169,7 +179,8 @@ function Home() {
         </section>
 
         {/* ═══════════════ GALLERY ═══════════════ */}
-        <section className="section section-soft hgal" data-chapter="VI" data-chapter-label="Remembrance">
+        <section className="section section-soft hgal section-scripture-bg" data-chapter="VI" data-chapter-label="Remembrance">
+          <Ambient rays dust tone="dark" />
           <div className="container" style={{ position: 'relative', zIndex: 10 }}>
             <SectionHeading eyebrow={<><em className="chapter">VI</em> Remembrance</>} title="From the Meetings" />
           </div>

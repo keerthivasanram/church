@@ -12,7 +12,7 @@ const itemVariants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 2.0, ease: [0.16, 1, 0.3, 1] },
   },
 }
 

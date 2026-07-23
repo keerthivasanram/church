@@ -29,7 +29,7 @@ function Reveal({ children, delay = 0, variant = 'up', className, as = 'div' }) 
       initial={reduce ? false : v.hidden}
       whileInView={reduce ? undefined : v.show}
       viewport={{ once: true, margin: '-90px' }}
-      transition={{ duration: variant === 'veil' ? 1.3 : 1.0, ease: [0.16, 1, 0.3, 1], delay }}
+      transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1], delay }}
     >
       {children}
     </MotionTag>

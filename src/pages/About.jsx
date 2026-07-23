@@ -1,10 +1,11 @@
 import founderImg from '../assets/images/site/about-founder.jpg'
 import pastorsImg from '../assets/images/site/equipping-pastors.jpg'
-import groupImg from '../assets/images/site/ministry-group.jpg'
+import familyImg from '../WhatsApp Image 2026-07-23 at 16.45.36.jpeg'
 import { Helmet } from 'react-helmet-async'
 import { aboutUs, site, stats } from '../data/siteContent'
 import Reveal from '../components/motion/Reveal'
 import Ornament from '../components/motion/Ornament'
+import Ambient from '../components/motion/Ambient'
 import { Stagger, StaggerItem } from '../components/motion/Stagger'
 import SectionHeading from '../components/SectionHeading'
 import Counter from '../components/Counter'
@@ -48,11 +49,12 @@ function About() {
         </div>
       </section>
 
-      <section className="section section-soft">
-        <div className="container about-split about-split--reverse">
+      <section className="section section-soft section-scripture-bg">
+        <Ambient rays dust tone="dark" />
+        <div className="container about-split about-split--reverse" style={{ position: 'relative', zIndex: 10 }}>
           <div className="about-split__figure-wrapper">
             <Reveal variant="veil" className="about-split__figure">
-              <img src={groupImg} alt="End Time Prophetic Ministries family" />
+              <img src={familyImg} alt="Prophet Daniel Bennet and family" />
             </Reveal>
           </div>
           <Reveal delay={0.1} className="about-split__body">
@@ -80,8 +82,9 @@ function About() {
         </div>
       </section>
 
-      <section className="section section-soft">
-        <div className="container">
+      <section className="section section-soft section-scripture-bg">
+        <Ambient rays dust tone="dark" />
+        <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <Stagger className="about-stats glass">
             {stats.map((s) => (
               <StaggerItem className="stat" key={s.label}>
@@ -95,8 +98,8 @@ function About() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container">
+      <section className="section about-vision-paper">
+        <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <SectionHeading eyebrow="Guided by Faith, Empowered by Purpose" title="Our Vision & Mission" />
           <Stagger className="grid pillars-grid">
             {aboutUs.pillars.map((p, i) => (

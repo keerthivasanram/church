@@ -146,20 +146,17 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
+  width: 48px;
   height: 34px;
-  border-radius: 50%;
-  border: 1px solid rgba(var(--accent-light-rgb), 0.5);
-  color: var(--gold-light);
+  border-radius: 8px;
+  background-color: #FF0000;
+  color: #ffffff;
   padding-left: 2px;              /* optically centre the triangle */
-  transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease),
-    color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease);
 }
 .chero__watch:hover { color: var(--white); }
 .chero__watch:hover .chero__play {
-  border-color: var(--gold);
-  background: var(--gold);
-  color: var(--cathedral);
+  background-color: #cc0000;
   transform: scale(1.08);
 }
 .chero__watch:focus-visible { outline: 1px solid var(--gold); outline-offset: 6px; }
@@ -605,6 +602,7 @@
 .hglobal__col--low { margin-top: 44px; }
 .hglobal__img {
   overflow: hidden;
+  border-radius: 50px !important;
   border: 1px solid rgba(var(--accent-rgb), 0.3);
   box-shadow: var(--shadow-md);
 }
@@ -614,6 +612,7 @@
   aspect-ratio: 3 / 4;
   object-fit: cover;
   display: block;
+  border-radius: 50px !important;
 }
 
 /* ═══════════════ THE MINISTRIES — THE HALLS ═══════════════ */

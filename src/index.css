@@ -322,6 +322,15 @@ p { margin: 0 0 18px; }
   background: var(--cathedral);
   color: rgba(202, 199, 194, 0.85);
 }
+
+/* Reusable Section 2 (The Word / Scripture Apse) background theme */
+.section-scripture-bg {
+  position: relative;
+  background:
+    radial-gradient(60% 220px at 50% 0%, rgba(var(--accent-light-rgb), 0.18), transparent 70%),
+    radial-gradient(120% 100% at 50% 0%, rgba(90, 36, 8, 0.35), transparent 60%),
+    linear-gradient(180deg, var(--cathedral-2), var(--cathedral)) !important;
+}
 /* stone materiality is for light halls only */
 .section-dark::before,
 .section-dark::after { display: none; }
@@ -525,6 +534,36 @@ p { margin: 0 0 18px; }
   background-image:
     linear-gradient(96deg, var(--gold-deep), var(--gold), var(--gold-light)),
     linear-gradient(180deg, rgba(var(--accent-light-rgb), 0.08), rgba(0, 0, 0, 0.06));
+}
+
+/* YouTube — luxury dark glass button with authentic YouTube red glow */
+.btn-youtube {
+  border-color: rgba(220, 38, 38, 0.45);
+  color: var(--white);
+  background-color: rgba(20, 10, 8, 0.65);
+  background-image:
+    linear-gradient(96deg, rgba(185, 28, 28, 0.85), rgba(220, 38, 38, 0.95), rgba(239, 68, 68, 0.85)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.15));
+  background-repeat: no-repeat;
+  background-size: 0% 100%, 100% 100%;
+  background-position: left center, center;
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: background-size var(--dur-slow) var(--ease), border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.btn-youtube:hover {
+  color: #ffffff;
+  border-color: #ef4444;
+  background-size: 100% 100%, 100% 100%;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 6px 25px rgba(220, 38, 38, 0.5);
+}
+.btn-youtube__icon {
+  flex-shrink: 0;
+  transition: transform var(--dur) var(--ease);
+}
+.btn-youtube:hover .btn-youtube__icon {
+  transform: scale(1.12);
 }
 
 /* ================= STAT ================= */
