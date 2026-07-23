@@ -2,11 +2,8 @@
    HOME — a walk through the basilica
    ====================================================================== */
 .home {
-  background-color: #F8F5EF; /* Warm ivory base */
-  background-image: url('../assets/images/site/paper-texture.png');
-  background-size: 600px;
-  background-attachment: fixed;
-  background-blend-mode: multiply;
+  /* transparent so the body's parchment background image shows through */
+  background: transparent;
 }
 
 /* ═══════════════ HERO — THE NAVE (volumetric, layered) ═══════════════ */
@@ -173,22 +170,20 @@
   position: absolute;
   right: clamp(-40px, -2vw, 0px);
   bottom: 0;
-  z-index: 2;
+  z-index: 3;
   width: clamp(360px, 42vw, 660px);
   pointer-events: none;
   will-change: transform;
   /* dissolve his feet into the floor of the scene */
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 96%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 96%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 75%, transparent 98%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 75%, transparent 98%);
 }
 .chero__figure img {
   display: block;
   width: 100%;
   height: auto;
-  /* Graded into the scene, but lifted enough to actually read as the messenger.
-     Still held under the type — he sits behind the words, not beside them. */
-  filter: grayscale(0.18) contrast(1.05) brightness(0.84) sepia(0.14);
-  opacity: 0.97;
+  filter: brightness(1.08) contrast(1.04) drop-shadow(0 0 3px rgba(0, 0, 0, 0.7));
+  opacity: 1;
 }
 
 /* ── the name above the title ── */

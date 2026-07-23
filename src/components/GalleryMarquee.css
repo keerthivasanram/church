@@ -1,0 +1,190 @@
+/* ======================================================================
+   THE INFINITE MANUSCRIPT — Cinematic Marquee Gallery
+   ====================================================================== */
+.marquee {
+  position: relative;
+  width: 100%;
+  padding: 40px 0 60px;
+  overflow: hidden;
+}
+
+.marquee__track-container {
+  width: 100vw;
+  /* Push to edge of screen by offsetting standard container padding */
+  margin-left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  display: flex;
+  /* Mask edges to blend smoothly into the background */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
+
+.marquee__track {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  /* Animate half the total width so it loops perfectly */
+  animation: marquee-scroll 45s linear infinite;
+  padding: 20px 0;
+}
+
+/* Pause the scrolling manuscript when a user examines it */
+.marquee__track-container:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Needs to exactly match half the track width */
+}
+
+/* Individual Marquee Card */
+.marquee__card {
+  position: relative;
+  /* Massive cinematic aspect ratio */
+  width: 420px;
+  height: 560px;
+  flex-shrink: 0;
+  cursor: pointer;
+  will-change: transform, filter;
+  z-index: 1;
+  transition: z-index 0.3s var(--ease);
+}
+
+.marquee__card.is-active {
+  z-index: 10;
+}
+
+/* The Arch Frame */
+.marquee__frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 200px 200px 6px 6px / 100px 100px 6px 6px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--gold-rgb), 0.3);
+  box-shadow:
+    0 24px 60px -16px rgba(12, 12, 14, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: var(--cathedral);
+  transition: border-color 0.6s var(--ease), box-shadow 0.6s var(--ease);
+}
+
+.marquee__card.is-active .marquee__frame {
+  border-color: var(--gold);
+  box-shadow:
+    0 40px 100px -20px rgba(var(--accent-rgb), 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.marquee__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Glass Glare */
+.marquee__glare {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    transparent 50%
+  );
+  opacity: 0.3;
+  transition: opacity 0.5s var(--ease);
+}
+
+.marquee__card.is-active .marquee__glare {
+  opacity: 0.75;
+}
+
+/* Typography Overlay */
+.marquee__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  padding: 30px;
+  background: linear-gradient(180deg, transparent 40%, rgba(6, 6, 7, 0.95) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.marquee__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: center;
+  align-items: center;
+}
+
+.marquee__badge {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+}
+
+.marquee__title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.15;
+}
+
+/* Footer CTA */
+.marquee__footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+/* Static fallback */
+.marquee--static {
+  padding: 60px 0;
+}
+
+.marquee--static .marquee__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.marquee--static .marquee__static-card {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 120px 120px 4px 4px / 60px 60px 4px 4px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--gold-rgb), 0.3);
+}
+
+.marquee--static .marquee__static-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.marquee--static .marquee__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .marquee__card {
+    width: 280px;
+    height: 400px;
+  }
+}

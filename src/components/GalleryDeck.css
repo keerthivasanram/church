@@ -1,0 +1,208 @@
+/* ======================================================================
+   THE ALTAR CARD DECK — Interactive Stacked Manuscript Gallery
+   ====================================================================== */
+.g-deck {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 0 50px;
+}
+
+.g-deck__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+/* Stack Container */
+.g-deck__stack {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  height: 420px;
+  perspective: 1200px;
+  margin: 0 auto;
+}
+
+/* Individual Card in Stack */
+.g-deck__card {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  will-change: transform, opacity;
+}
+
+.g-deck__frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 220px 220px 6px 6px / 90px 90px 6px 6px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  box-shadow:
+    0 24px 60px -16px rgba(12, 12, 14, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: var(--cathedral);
+  transition: border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+
+.g-deck__card.is-top .g-deck__frame {
+  border-color: var(--gold);
+  box-shadow:
+    0 32px 80px -20px rgba(var(--accent-rgb), 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.g-deck__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.05) brightness(0.96);
+  transition: transform 0.8s var(--ease), filter 0.6s var(--ease);
+}
+
+.g-deck__card.is-top:hover .g-deck__img {
+  transform: scale(1.05);
+  filter: contrast(1.08) brightness(1.04);
+}
+
+/* Glass Glare */
+.g-deck__glare {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    transparent 50%
+  );
+  opacity: 0.4;
+}
+
+.g-deck__card.is-top .g-deck__glare {
+  opacity: 0.75;
+}
+
+/* Typography Overlay */
+.g-deck__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 24px 28px;
+  background: linear-gradient(180deg, transparent 0%, rgba(6, 6, 7, 0.92) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.g-deck__badge {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+}
+
+.g-deck__title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* Deck Controls & Progress Rail */
+.g-deck__controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.g-deck__btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--accent-rgb), 0.4);
+  background: rgba(18, 16, 14, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--gold-light);
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s var(--ease);
+}
+
+.g-deck__btn:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--cathedral);
+  transform: scale(1.08);
+}
+
+.g-deck__rail {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.g-deck__counter,
+.g-deck__total {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--gold-light);
+}
+
+.g-deck__total {
+  color: var(--muted);
+}
+
+.g-deck__track {
+  width: 140px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.g-deck__bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-light));
+  border-radius: 2px;
+}
+
+.g-deck__footer {
+  margin-top: 10px;
+}
+
+/* Static fallback */
+.g-deck--static .g-deck__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* Responsive */
+@media (max-width: 560px) {
+  .g-deck__stack {
+    max-width: 320px;
+    height: 320px;
+  }
+  .g-deck__frame {
+    border-radius: 140px 140px 6px 6px / 60px 60px 6px 6px;
+  }
+  .g-deck__title {
+    font-size: 19px;
+  }
+}

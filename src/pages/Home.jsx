@@ -16,7 +16,7 @@ import Drift from '../components/motion/Drift'
 import Magnetic from '../components/motion/Magnetic'
 import ChapterRail from '../components/ChapterRail'
 import Colonnade from '../components/Colonnade'
-import GalleryCollage from '../components/GalleryCollage'
+import GalleryTraverse from '../components/GalleryTraverse'
 import SectionHeading from '../components/SectionHeading'
 import Counter from '../components/Counter'
 import Arrow from '../components/Arrow'
@@ -170,10 +170,10 @@ function Home() {
 
         {/* ═══════════════ GALLERY ═══════════════ */}
         <section className="section section-soft hgal" data-chapter="VI" data-chapter-label="Remembrance">
-          <div className="container">
+          <div className="container" style={{ position: 'relative', zIndex: 10 }}>
             <SectionHeading eyebrow={<><em className="chapter">VI</em> Remembrance</>} title="From the Meetings" />
-            <GalleryCollage images={previewImages} />
           </div>
+          <GalleryTraverse images={previewImages} />
         </section>
 
         {/* ═══════════════ PRAYER / INVITE — THE THRESHOLD ═══════════════ */}

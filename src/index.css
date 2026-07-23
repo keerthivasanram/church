@@ -12,12 +12,13 @@
      re-toned from this block alone. */
   --white: #FFFFFF;
 
-  /* ---- The page ground stays WHITE. Black is a *section* material, not the
-         background: the halls alternate white → black → white, and the raised
-         surfaces inside them are black panels with an ember edge. ---- */
-  --ivory: #FFFFFF;         /* the page ground */
-  --travertine: #EFEEEC;    /* light stone, for surfaces on white halls */
-  --marble: #F6F5F3;
+  /* ---- The page ground uses a warm parchment texture. Black is a *section*
+         material, not the background: the halls alternate parchment → black →
+         parchment, and the raised surfaces inside them are black panels with an
+         ember edge. ---- */
+  --ivory: #E8DFD0;         /* parchment ground — sampled from the image */
+  --travertine: #DDD3C2;    /* warm stone, for surfaces on parchment halls */
+  --marble: #E4DACE;
 
   --ember: #C75B12;         /* the single accent — burnt, never bright */
   --ember-light: #E8763A;
@@ -36,15 +37,15 @@
   --accent-rgb: 199, 91, 18;
   --accent-light-rgb: 232, 118, 58;
 
-  /* ---- Semantic tokens (light ground) ---- */
-  --bg: #FFFFFF;
+  /* ---- Semantic tokens (parchment ground) ---- */
+  --bg: var(--ivory);
   --bg-soft: #0A0A0B;       /* the alternating hall IS black now */
-  --bg-warm: #F7F6F4;
-  --ink: #101012;
-  --ink-soft: #3C3C41;
-  --muted: #7A7A80;
-  --line: #E5E3DF;
-  --line-strong: #CAC7C2;
+  --bg-warm: #DAD0BF;
+  --ink: #2C1E12;           /* dark brown text on parchment for readability */
+  --ink-soft: #4A3525;
+  --muted: #8B6B4C;
+  --line: rgba(139, 107, 76, 0.25);
+  --line-strong: rgba(139, 107, 76, 0.4);
 
   --glass: rgba(255, 255, 255, 0.72);
   --glass-brd: rgba(var(--accent-rgb), 0.28);
@@ -96,18 +97,8 @@
 body {
   margin: 0;
   position: relative;
-}
-
-/* Faint travertine grain over the whole page — barely-there marble tooth */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.5;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  /* Parchment background image — the golden-brown aged manuscript look */
+  background: var(--bg) url('./assets/images/site/parchment-bg.jpg') center / cover fixed;
 }
 
 #root {

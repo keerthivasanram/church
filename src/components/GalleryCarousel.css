@@ -1,0 +1,238 @@
+/* ======================================================================
+   THE 3D ROTATIONAL CYLINDER CAROUSEL — Option 1
+   ====================================================================== */
+.g-carousel {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 30px 0 50px;
+  overflow: hidden;
+}
+
+/* 3D Viewport Stage */
+.g-carousel__stage {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1400px;
+}
+
+/* Rotational Cylinder Container */
+.g-carousel__cylinder {
+  position: relative;
+  width: 320px;
+  height: 380px;
+  transform-style: preserve-3d;
+  cursor: grab;
+}
+
+.g-carousel__cylinder:active {
+  cursor: grabbing;
+}
+
+/* Individual Card on the 3D Cylinder */
+.g-carousel__card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.6s var(--ease), filter 0.6s var(--ease);
+}
+
+.g-carousel__card.is-active {
+  opacity: 1;
+}
+
+.g-carousel__frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 200px 200px 6px 6px / 80px 80px 6px 6px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+  box-shadow:
+    0 20px 50px -16px rgba(12, 12, 14, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: var(--cathedral);
+  transition: border-color 0.6s var(--ease), box-shadow 0.6s var(--ease);
+}
+
+.g-carousel__card.is-active .g-carousel__frame {
+  border-color: var(--gold);
+  box-shadow:
+    0 32px 80px -20px rgba(var(--accent-rgb), 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.g-carousel__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.05) brightness(0.92);
+  transition: transform 0.8s var(--ease), filter 0.6s var(--ease);
+}
+
+.g-carousel__card.is-active .g-carousel__img {
+  transform: scale(1.04);
+  filter: contrast(1.08) brightness(1.04);
+}
+
+/* Glass Glare */
+.g-carousel__glare {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    transparent 50%
+  );
+  opacity: 0.3;
+}
+
+.g-carousel__card.is-active .g-carousel__glare {
+  opacity: 0.8;
+}
+
+/* Typography Overlay */
+.g-carousel__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 22px 24px;
+  background: linear-gradient(180deg, transparent 0%, rgba(6, 6, 7, 0.9) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+
+.g-carousel__card.is-active .g-carousel__overlay {
+  opacity: 1;
+}
+
+.g-carousel__badge {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+}
+
+.g-carousel__title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* Controls & Progress Rail */
+.g-carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.g-carousel__btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--accent-rgb), 0.4);
+  background: rgba(18, 16, 14, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--gold-light);
+  font-size: 22px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s var(--ease);
+}
+
+.g-carousel__btn:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--cathedral);
+  transform: scale(1.08);
+}
+
+.g-carousel__rail {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.g-carousel__counter,
+.g-carousel__total {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--gold-light);
+}
+
+.g-carousel__total {
+  color: var(--muted);
+}
+
+.g-carousel__track {
+  width: 140px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.g-carousel__bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-deep), var(--gold-light));
+  border-radius: 2px;
+}
+
+.g-carousel__footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+/* Static fallback */
+.g-carousel--static .g-carousel__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .g-carousel__stage {
+    height: 360px;
+  }
+  .g-carousel__cylinder {
+    width: 240px;
+    height: 310px;
+  }
+  .g-carousel__frame {
+    border-radius: 140px 140px 6px 6px / 60px 60px 6px 6px;
+  }
+  .g-carousel__title {
+    font-size: 18px;
+  }
+}

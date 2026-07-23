@@ -1,50 +1,118 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useMotionValue,
+  useReducedMotion,
+} from 'framer-motion'
 import Magnetic from './motion/Magnetic'
+import Arrow from './Arrow'
 import './GalleryCollage.css'
 
-/**
- * A scattered, mismatched grid of photos that fly in from offscreen 
- * as the user scrolls into the section.
- */
+function CollageCard({ img, index, scrollYProgress }) {
+  const [hovered, setHovered] = useState(false)
+
+  const mx = useMotionValue(0)
+  const my = useMotionValue(0)
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [12, -12]), {
+    stiffness: 160,
+    damping: 16,
+  })
+  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-12, 12]), {
+    stiffness: 160,
+    damping: 16,
+  })
+
+  const trajectories = [
+    { x: -220, y: -140, rot: -10, scale: 0.8 },
+    { x: 0, y: -180, rot: 6, scale: 0.75 },
+    { x: 220, y: -140, rot: -8, scale: 0.8 },
+    { x: -240, y: 120, rot: 8, scale: 0.75 },
+    { x: 0, y: 180, rot: -5, scale: 0.8 },
+    { x: 240, y: 120, rot: 10, scale: 0.75 },
+  ]
+
+  const t = trajectories[index % trajectories.length]
+
+  const x = useTransform(scrollYProgress, [0, 0.45, 0.7, 1], [t.x, 0, 0, t.x * -0.5])
+  const y = useTransform(scrollYProgress, [0, 0.45, 0.7, 1], [t.y, 0, 0, t.y * -0.5])
+  const rotZ = useTransform(scrollYProgress, [0, 0.45, 0.7, 1], [t.rot, 0, 0, t.rot * -0.4])
+  const scale = useTransform(scrollYProgress, [0, 0.45, 0.7, 1], [t.scale, 1, 1, 0.88])
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
+
+  function handleMouseMove(e) {
+    const rect = e.currentTarget.getBoundingClientRect()
+    mx.set((e.clientX - rect.left) / rect.width - 0.5)
+    my.set((e.clientY - rect.top) / rect.height - 0.5)
+  }
+
+  function handleMouseLeave() {
+    mx.set(0)
+    my.set(0)
+    setHovered(false)
+  }
+
+  return (
+    <motion.figure
+      className={`collage__card collage__card--${index} ${hovered ? 'is-hovered' : ''}`}
+      style={{
+        x,
+        y,
+        rotateZ: rotZ,
+        rotateX,
+        rotateY,
+        scale,
+        opacity,
+        transformStyle: 'preserve-3d',
+      }}
+      whileHover={{ scale: 1.06 }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="collage__card-frame arch">
+        <img
+          src={img.thumb}
+          alt={`Sacred meeting moment ${img.id}`}
+          className="collage__card-img"
+        />
+        <div className="collage__card-overlay">
+          <span className="collage__card-badge">Chapter VI</span>
+          <span className="collage__card-title">Encounter #{img.id}</span>
+        </div>
+        <div className="collage__card-glare" aria-hidden="true" />
+      </div>
+    </motion.figure>
+  )
+}
+
 function GalleryCollage({ images }) {
   const ref = useRef(null)
   const reduce = useReducedMotion()
 
-  // Track the scroll progress of the entire sticky container
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
-
-  // Define starting offsets for each image based on index
-  // Image 0: from top-left
-  // Image 1: from top
-  // Image 2: from top-right
-  // Image 3: from left
-  // Image 4: from bottom
-  // Image 5: from bottom-left
-  const startOffsets = [
-    { x: -500, y: -400 },
-    { x: 0, y: -600 },
-    { x: 500, y: -400 },
-    { x: -600, y: 0 },
-    { x: 0, y: 600 },
-    { x: -500, y: 500 },
-  ]
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end end'],
+  })
 
   if (reduce) {
     return (
-      <div className="collage">
-        <div className="collage__stage" style={{ position: 'relative', height: 'auto', padding: '120px 0' }}>
-          <div className="collage__grid">
-            {images.slice(0, 6).map((img, i) => (
-              <figure key={img.id} className={`collage__item collage__item--${i}`}>
-                <img src={img.thumb} alt={`Gallery photo ${img.id}`} />
-              </figure>
-            ))}
-            <div className="collage__cta-box">
-              <Link to="/gallery" className="btn btn-ghost">View Gallery</Link>
-            </div>
-          </div>
+      <div className="collage collage--static">
+        <div className="collage__grid">
+          {images.slice(0, 6).map((img, i) => (
+            <figure key={img.id} className="collage__card arch">
+              <img src={img.thumb} alt={`Gallery photograph ${img.id}`} />
+            </figure>
+          ))}
+        </div>
+        <div className="collage__cta-box">
+          <Link to="/gallery" className="btn btn-ghost">
+            View Full Gallery <Arrow />
+          </Link>
         </div>
       </div>
     )
@@ -54,78 +122,35 @@ function GalleryCollage({ images }) {
     <div className="collage" ref={ref}>
       <div className="collage__stage">
         <div className="collage__grid">
-          {images.slice(0, 6).map((img, i) => {
-            const startX = startOffsets[i]?.x || 0
-            const startY = startOffsets[i]?.y || 0
-            
-            // Photos fly in quickly during the first half of the scroll
-            const x = useTransform(scrollYProgress, [0, 0.45], [startX, 0])
-            const y = useTransform(scrollYProgress, [0, 0.45], [startY, 0])
-            
-            // 3D rotations as they fly in
-            const rotStartZ = (i % 2 === 0 ? 1 : -1) * (15 + i * 4)
-            const rotStartX = (i % 3 === 0 ? 1 : -1) * 35
-            const rotStartY = (i % 2 === 0 ? -1 : 1) * 45
-            
-            const rotateZ = useTransform(scrollYProgress, [0, 0.45], [rotStartZ, 0])
-            const rotateX = useTransform(scrollYProgress, [0, 0.45], [rotStartX, 0])
-            const rotateY = useTransform(scrollYProgress, [0, 0.45], [rotStartY, 0])
-            
-            // Opacity fades in slightly later so it doesn't just pop in
-            const opacity = useTransform(scrollYProgress, [0.1, 0.35], [0, 1])
-            const scale = useTransform(scrollYProgress, [0, 0.45], [0.6, 1])
+          {images.slice(0, 6).map((img, i) => (
+            <CollageCard
+              key={img.id}
+              img={img}
+              index={i}
+              scrollYProgress={scrollYProgress}
+            />
+          ))}
 
-            // Exit animation as we scroll past (the second half of scroll)
-            const exitX = useTransform(scrollYProgress, [0.75, 1], [0, startX * 0.8])
-            const exitY = useTransform(scrollYProgress, [0.75, 1], [0, startY * 0.8])
-            const exitRotateZ = useTransform(scrollYProgress, [0.75, 1], [0, rotStartZ * -0.5])
-            const exitOpacity = useTransform(scrollYProgress, [0.8, 1], [1, 0])
-            
-            const finalX = useTransform(() => {
-              if (scrollYProgress.get() > 0.75) return exitX.get()
-              return x.get()
-            })
-            const finalY = useTransform(() => {
-              if (scrollYProgress.get() > 0.75) return exitY.get()
-              return y.get()
-            })
-            const finalRotateZ = useTransform(() => {
-              if (scrollYProgress.get() > 0.75) return exitRotateZ.get()
-              return rotateZ.get()
-            })
-            const finalOpacity = useTransform(() => {
-              if (scrollYProgress.get() > 0.75) return exitOpacity.get()
-              return opacity.get()
-            })
-
-            return (
-              <motion.figure 
-                key={img.id} 
-                className={`collage__item collage__item--${i}`}
-                style={{ 
-                  x: finalX, 
-                  y: finalY, 
-                  rotateZ: finalRotateZ, 
-                  rotateX, 
-                  rotateY, 
-                  scale, 
-                  opacity: finalOpacity,
-                  transformStyle: 'preserve-3d'
-                }}
-              >
-                <img src={img.thumb} alt={`Gallery photo ${img.id}`} />
-              </motion.figure>
-            )
-          })}
-          
-          <motion.div 
+          <motion.div
             className="collage__cta-box"
-            style={{ 
-              opacity: useTransform(scrollYProgress, [0.3, 0.5, 0.8, 1], [0, 1, 1, 0]),
-              scale: useTransform(scrollYProgress, [0.3, 0.5], [0.8, 1])
+            style={{
+              opacity: useTransform(
+                scrollYProgress,
+                [0.35, 0.5, 0.75, 0.95],
+                [0, 1, 1, 0]
+              ),
+              scale: useTransform(
+                scrollYProgress,
+                [0.35, 0.5, 0.75, 0.95],
+                [0.85, 1, 1, 0.9]
+              ),
             }}
           >
-            <Magnetic><Link to="/gallery" className="btn btn-ghost">View Full Gallery</Link></Magnetic>
+            <Magnetic>
+              <Link to="/gallery" className="btn btn-ghost">
+                View Full Gallery <Arrow />
+              </Link>
+            </Magnetic>
           </motion.div>
         </div>
       </div>

@@ -1,0 +1,180 @@
+/* ======================================================================
+   THE ARCHWAY TRAVERSE — Z-Space Walkthrough Gallery
+   ====================================================================== */
+.traverse {
+  position: relative;
+  width: 100%;
+  /* 400vh gives plenty of scroll distance to "walk through" all 6 photos */
+  height: 400vh;
+}
+
+/* Pinned Stage */
+.traverse__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(circle at center, transparent 0%, rgba(12, 11, 10, 0.4) 100%);
+}
+
+/* The Corridor: The True 3D CSS Perspective Engine */
+.traverse__corridor {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1400px; /* Crucial for native 3D depth! */
+  perspective-origin: center center;
+  transform-style: preserve-3d;
+}
+
+/* Individual Card */
+.traverse__card {
+  position: absolute;
+  width: 28vw;
+  max-width: 440px;
+  min-width: 280px;
+  aspect-ratio: 3 / 4;
+  /* Hardware acceleration for massive Z-axis travel */
+  will-change: transform, opacity, filter;
+  transform-style: preserve-3d;
+}
+
+/* The Arch Frame */
+.traverse__frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 200px 200px 4px 4px / 120px 120px 4px 4px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--gold-rgb), 0.25);
+  box-shadow:
+    0 40px 100px -20px rgba(12, 12, 14, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: var(--cathedral);
+}
+
+.traverse__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Smooth out the parallax push-back */
+  will-change: transform;
+}
+
+/* Dynamic Glass Glare Sweep */
+.traverse__glare {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 65%,
+    transparent 100%
+  );
+  mix-blend-mode: overlay;
+  will-change: transform, opacity;
+}
+
+/* Typography Overlay */
+.traverse__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 30px;
+  background: linear-gradient(180deg, transparent 0%, rgba(6, 6, 7, 0.9) 100%);
+  display: flex;
+  justify-content: center;
+}
+
+.traverse__num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: rgba(var(--gold-rgb), 0.8);
+  letter-spacing: -0.02em;
+}
+
+/* Final CTA */
+.traverse__cta-box {
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  will-change: transform, opacity;
+}
+
+.traverse__scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  opacity: 0.6;
+}
+
+/* Ambient Dust Overlay */
+.traverse__dust {
+  position: absolute;
+  inset: -100px;
+  z-index: 50;
+  pointer-events: none;
+  background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+/* Static fallback */
+.traverse--static {
+  height: auto;
+  padding: 80px 0;
+}
+
+.traverse--static .traverse__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.traverse--static .traverse__static-card {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 120px 120px 4px 4px / 60px 60px 4px 4px;
+  overflow: hidden;
+  border: 1px solid rgba(var(--gold-rgb), 0.3);
+}
+
+.traverse--static .traverse__static-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.traverse--static .traverse__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .traverse__card {
+    width: 50vw;
+  }
+}
