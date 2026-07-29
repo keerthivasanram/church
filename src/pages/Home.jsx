@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import CathedralHero from '../components/CathedralHero'
 import founderImg from '../assets/images/site/about-founder.jpg'
 import outreachImg from '../assets/images/site/outreach.jpg'
 import internationalImg from '../assets/images/site/international.jpg'
 import malaysiaImg from '../assets/images/site/malaysia-outreach.jpg'
 import brochureFlyerImg from '../assets/images/posters/WhatsApp Image 2026-07-23 at 16.51.15.jpeg'
+import conferencePosterImg from '../assets/images/posters/prophetic-misphacha-conference.jpg'
 import { site, aboutUs, ministries, stats, testimonials } from '../data/siteContent'
 import { galleryImages } from '../data/gallery'
 import Reveal from '../components/motion/Reveal'
@@ -24,6 +27,7 @@ import Arrow from '../components/Arrow'
 import './Home.css'
 
 function Home() {
+  const [posterOpen, setPosterOpen] = useState(false)
   const previewImages = galleryImages.slice(0, 6)
 
   return (
@@ -187,13 +191,162 @@ function Home() {
           <GalleryTraverse images={previewImages} />
         </section>
 
+        {/* ═══════════════ UPCOMING CONFERENCE ═══════════════ */}
+        <section className="section section-soft hconference section-scripture-bg" data-chapter="VII" data-chapter-label="Upcoming Event">
+          <Ambient rays dust tone="gold" />
+          <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+            <SectionHeading
+              eyebrow={<><em className="chapter">VII</em> Upcoming Event</>}
+              title="Prophetic Misphacha Conference 2026"
+            >
+              Rebuilding Christ-Centered Healthy Families &amp; Restoring Marriages
+            </SectionHeading>
+
+            <div className="hconference__grid">
+              {/* Poster Preview Card */}
+              <div className="hconference__poster-wrapper">
+                <div className="hconference__poster-card" onClick={() => setPosterOpen(true)}>
+                  <img
+                    src={conferencePosterImg}
+                    alt="Prophetic Misphacha Conference Poster - Prophet Daniel Bennet"
+                    className="hconference__poster-img"
+                  />
+                  <div className="hconference__poster-overlay">
+                    <span className="hconference__zoom-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" strokeLinecap="round" />
+                      </svg>
+                      Click to Expand Poster
+                    </span>
+                  </div>
+                  <span className="hconference__badge">22 Aug 2026</span>
+                </div>
+              </div>
+
+              {/* Conference Details */}
+              <div className="hconference__info">
+                <div className="hconference__scripture">
+                  <span className="hconference__quote">“As for Me and My House, We Will Serve the Lord”</span>
+                  <span className="hconference__verse">— Joshua 24:15</span>
+                </div>
+
+                <div className="hconference__meta-grid">
+                  <div className="hconference__meta-item">
+                    <div className="hconference__meta-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--gold)" strokeWidth="1.8">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="hconference__meta-label">Date &amp; Time</div>
+                      <div className="hconference__meta-val">22 August 2026 (Saturday)</div>
+                      <div className="hconference__meta-sub">9:30 AM – 1:00 PM</div>
+                    </div>
+                  </div>
+
+                  <div className="hconference__meta-item">
+                    <div className="hconference__meta-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--gold)" strokeWidth="1.8">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="hconference__meta-label">Closing Date</div>
+                      <div className="hconference__meta-val">15 August 2026</div>
+                      <div className="hconference__meta-sub">Registration Closes Soon</div>
+                    </div>
+                  </div>
+
+                  <div className="hconference__meta-item">
+                    <div className="hconference__meta-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--gold)" strokeWidth="1.8">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="hconference__meta-label">Venue</div>
+                      <div className="hconference__meta-val">STEVE’S GYM</div>
+                      <div className="hconference__meta-sub">No. 10, Krishna Reddy, Henpur Bagalur Road, HBR 3rd Block, Bengaluru - 500043</div>
+                    </div>
+                  </div>
+
+                  <div className="hconference__meta-item">
+                    <div className="hconference__meta-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--gold)" strokeWidth="1.8">
+                        <path d="M20 12V8H4v4M20 12v6H4v-6M20 12H4M16 6V4H8v2" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="hconference__meta-label">Registration</div>
+                      <div className="hconference__meta-val">₹200/- per person</div>
+                      <div className="hconference__meta-sub">Limited Seats (30 Seats Only)</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="hconference__highlights">
+                  <h3>Conference Focus &amp; Sessions</h3>
+                  <ul>
+                    <li><strong>Rebuilding Christ-Centered Healthy Families</strong> — Newly married couples are welcome</li>
+                    <li><strong>Forgiveness &amp; Healing</strong> in marriage</li>
+                    <li><strong>Dealing with Modern Challenges</strong> — Technology, peer pressure, and cultural influences</li>
+                    <li><strong>Restoring Love, Faith, &amp; Unity</strong> in marriage</li>
+                  </ul>
+                </div>
+
+                <div className="hconference__actions">
+                  <Magnetic>
+                    <a href="tel:+919342523393" className="btn btn-primary">
+                      Call &amp; Register: +91 93425 23393 <Arrow />
+                    </a>
+                  </Magnetic>
+                  <button onClick={() => setPosterOpen(true)} className="btn btn-outline">
+                    View Full Poster
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Lightbox for Conference Poster */}
+        <AnimatePresence>
+          {posterOpen && (
+            <motion.div
+              className="lightbox"
+              onClick={() => setPosterOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <button className="lightbox__close" aria-label="Close" onClick={() => setPosterOpen(false)}>&times;</button>
+              <motion.img
+                src={conferencePosterImg}
+                alt="Prophetic Misphacha Conference Poster"
+                onClick={(e) => e.stopPropagation()}
+                initial={{ opacity: 0, scale: 0.94 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3 }}
+                style={{ maxHeight: '88vh', borderRadius: '12px', border: '1px solid rgba(var(--accent-rgb), 0.5)' }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {/* ═══════════════ PRAYER / INVITE — THE THRESHOLD ═══════════════ */}
-        <section className="hprayer" data-chapter="VII" data-chapter-label="The Invitation">
+        <section className="hprayer" data-chapter="VIII" data-chapter-label="The Invitation">
           <div className="hprayer__bg" aria-hidden="true" />
           <Ambient rays dust fog tone="dark" />
           <div className="container">
             <Reveal variant="blur" className="hprayer__inner">
-              <span className="eyebrow eyebrow--center"><em className="chapter">VII</em> The Invitation</span>
+              <span className="eyebrow eyebrow--center"><em className="chapter">VIII</em> The Invitation</span>
               <h2>Invite Prophet Daniel Bennet<br />to your church or event</h2>
               <Ornament center />
               <p>{aboutUs.founderStory[2]}</p>

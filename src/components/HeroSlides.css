@@ -1,0 +1,162 @@
+/* ======================================================================
+   HERO SLIDES — the nave's plate is five photographs, not one.
+   The plates live inside .chero__bg, so the stage's scroll zoom and the
+   pointer parallax carry them for free. Only opacity animates.
+   ====================================================================== */
+.chero__plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  user-select: none;
+  transition: opacity 1.9s var(--ease-slow);
+  /* graded far down into the ember nave — the photographs are the room's
+     light, never its subject. The type has to keep every bit of contrast.
+     --plate-dim is per-photograph: a bright white-ceilinged hall needs far
+     more taking down than a dark auditorium, or the plates flicker in level
+     as they change. */
+  filter: sepia(0.4) saturate(1.1) hue-rotate(-10deg)
+    brightness(var(--plate-dim, 0.46)) contrast(1.04);
+}
+.chero__plate.is-lit { opacity: 1; }
+
+/* ── the rail, on the ledge just above the ledger and aligned to the grid.
+      It does NOT live inside .chero__ledger-row: four figures plus this rail
+      measure ~1385px against 1168px of container, so it was being clipped
+      straight off the right of the page (body is overflow-x: clip). ── */
+.hrail {
+  position: absolute;
+  z-index: 4;               /* above the figure (3), which stands under it */
+  right: max(32px, calc((100% - 1200px) / 2 + 32px));
+  bottom: clamp(96px, 11vh, 112px);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+/* a shallow pool of shadow so the rail reads over the messenger's shoulder */
+.hrail::before {
+  content: '';
+  position: absolute;
+  inset: -14px -22px;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 999px;
+  background: radial-gradient(70% 100% at 60% 50%,
+    rgba(6, 5, 5, 0.72), rgba(6, 5, 5, 0.34) 62%, rgba(6, 5, 5, 0) 88%);
+}
+
+.hrail__caption {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-right: 4px;
+  max-width: 30ch;
+}
+.hrail__numeral {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--accent-light);
+}
+.hrail__title {
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+  white-space: nowrap;
+}
+
+.hrail__arrow {
+  flex: 0 0 auto;
+  width: 27px;
+  height: 27px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(var(--accent-rgb), 0.32);
+  border-radius: 50%;
+  background: rgba(10, 8, 8, 0.5);
+  color: rgba(255, 255, 255, 0.66);
+  cursor: pointer;
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+.hrail__arrow:hover {
+  color: var(--white);
+  border-color: rgba(var(--accent-light-rgb), 0.85);
+  background: rgba(var(--accent-rgb), 0.22);
+}
+.hrail__arrow:focus-visible { outline: 1px solid var(--accent-light); outline-offset: 3px; }
+
+.hrail__ticks {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.hrail__tick {
+  position: relative;
+  width: 15px;
+  height: 2px;
+  padding: 10px 0;           /* a real hit area around a hairline */
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: width 0.7s var(--ease);
+}
+.hrail__tick::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  margin-top: -1px;
+  background: rgba(255, 255, 255, 0.26);
+  transition: background-color var(--dur) var(--ease);
+}
+.hrail__tick:hover::before { background: rgba(255, 255, 255, 0.6); }
+.hrail__tick.is-on { width: 34px; }
+.hrail__tick.is-on::before { background: rgba(var(--accent-light-rgb), 0.3); }
+.hrail__tick:focus-visible { outline: 1px solid var(--accent-light); outline-offset: 2px; }
+
+/* the dwell, drawn along the lit tick */
+.hrail__tick i {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  margin-top: -1px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: var(--accent-light);
+  box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.9);
+}
+.hrail__tick i.is-running { animation: hrail-dwell linear forwards; }
+@keyframes hrail-dwell {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.hrail__tick.is-on i:not(.is-running) { transform: scaleX(1); }
+
+@media (max-width: 1180px) {
+  .hrail__caption { display: none; }
+}
+@media (max-width: 760px) {
+  .hrail { gap: 10px; }
+  .hrail__arrow { display: none; }
+  .hrail__tick { width: 12px; }
+  .hrail__tick.is-on { width: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chero__plate { transition: opacity 0.25s linear; }
+  .hrail__tick i { display: none; }
+}

@@ -11,6 +11,7 @@ import {
 import Ambient from './motion/Ambient'
 import Ornament from './motion/Ornament'
 import Magnetic from './motion/Magnetic'
+import { useHeroSlides, HeroSlidePlates, HeroSlideRail } from './HeroSlides'
 import { site, stats, focusAreas } from '../data/siteContent'
 import prophetCutout from '../assets/images/site/prophet-daniel-bennet.png'
 
@@ -48,6 +49,9 @@ function CathedralHero() {
   const figureX = useTransform(mvx, [-0.5, 0.5], [26, -26])
   const figureY = useTransform(scrollYProgress, [0, 1], [0, 60])
 
+  // the plate is five photographs from the meetings, dealt slowly
+  const slides = useHeroSlides()
+
   function onMove(e) {
     if (reduce) return
     mvx.set(e.clientX / window.innerWidth - 0.5)
@@ -62,9 +66,12 @@ function CathedralHero() {
 
   return (
     <section className="chero" ref={ref} onMouseMove={onMove} onMouseLeave={onLeave}>
-      {/* 1–2 · cathedral plate (camera zoom) + colour grade */}
+      {/* 1–2 · the plate — five photographs cross-dissolving on the camera-zoom
+              stage — plus the colour grade over them */}
       <motion.div className="chero__stage" style={reduce ? staticStyle : { scale: bgScale, y: bgY }}>
-        <motion.div className="chero__bg" style={reduce ? staticStyle : { x: bgX, y: bgPy }} aria-hidden="true" />
+        <motion.div className="chero__bg" style={reduce ? staticStyle : { x: bgX, y: bgPy }} aria-hidden="true">
+          <HeroSlidePlates index={slides.index} />
+        </motion.div>
         <div className="chero__grade" aria-hidden="true" />
       </motion.div>
 
@@ -159,6 +166,9 @@ function CathedralHero() {
           ))}
         </div>
       </motion.div>
+
+      {/* the plate's own controls, on the ledge just above the ledger */}
+      <HeroSlideRail {...slides} />
 
       {/* silent scroll cue */}
       <motion.div
