@@ -98,7 +98,7 @@ body {
   margin: 0;
   position: relative;
   /* Parchment background image — the golden-brown aged manuscript look */
-  background: var(--bg) url('./assets/images/site/parchment-bg.jpg') center / cover fixed;
+  background: var(--bg) url('./assets/images/site/parchment-bg.png') center / cover fixed;
 }
 
 #root {
@@ -132,7 +132,10 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 { font-size: clamp(52px, 9vw, 132px); font-weight: 500; }
-h2 { font-size: clamp(40px, 5.6vw, 82px); }
+h2 { 
+  font-size: clamp(32px, 4.5vw, 56px); 
+  text-transform: uppercase; 
+}
 h3 { font-size: clamp(26px, 3vw, 38px); }
 h4 { font-size: 23px; }
 
@@ -438,8 +441,9 @@ p { margin: 0 0 18px; }
 .page-hero h1 {
   margin: 0;
   font-size: clamp(52px, 8vw, 104px);
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
   line-height: 1.02;
+  text-transform: uppercase;
 }
 .page-hero__rule {
   display: block;
@@ -474,6 +478,7 @@ p { margin: 0 0 18px; }
   z-index: 0;
   letter-spacing: -0.04em;
   user-select: none;
+  text-transform: uppercase;
 }
 
 /* ================= BUTTONS ================= */

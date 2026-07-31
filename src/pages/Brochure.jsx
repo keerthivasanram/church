@@ -6,6 +6,7 @@ import { brochurePosters } from '../data/brochure'
 import { Stagger, StaggerItem } from '../components/motion/Stagger'
 import Reveal from '../components/motion/Reveal'
 import Ornament from '../components/motion/Ornament'
+import HeroLogo from '../components/HeroLogo'
 import './Brochure.css'
 
 function Brochure() {
@@ -45,6 +46,7 @@ function Brochure() {
       </Helmet>
 
       <section className="page-hero">
+        <HeroLogo />
         <div className="container">
           <Reveal>
             <span className="eyebrow eyebrow--center">Official Publications</span>

@@ -7,6 +7,7 @@ import { Stagger, StaggerItem } from '../components/motion/Stagger'
 import Ornament from '../components/motion/Ornament'
 import Counter from '../components/Counter'
 import Arrow from '../components/Arrow'
+import HeroLogo from '../components/HeroLogo'
 import './Studio.css'
 
 const philosophy = [
@@ -125,6 +126,7 @@ function Studio() {
 
       <div className="studio">
         <section className="page-hero studio-hero">
+          <HeroLogo />
           <div className="container">
             <Reveal>
               <span className="eyebrow eyebrow--center">Design &amp; Build Notes</span>

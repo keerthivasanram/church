@@ -5,6 +5,7 @@ import { galleryImages } from '../data/gallery'
 import { Stagger, StaggerItem } from '../components/motion/Stagger'
 import Reveal from '../components/motion/Reveal'
 import Ornament from '../components/motion/Ornament'
+import HeroLogo from '../components/HeroLogo'
 import './Gallery.css'
 
 function Gallery() {
@@ -44,6 +45,7 @@ function Gallery() {
       </Helmet>
 
       <section className="page-hero">
+        <HeroLogo />
         <div className="container">
           <Reveal>
             <span className="eyebrow eyebrow--center">Gallery</span>

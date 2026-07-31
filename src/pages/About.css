@@ -140,7 +140,7 @@
 /* Brown Parchment Paper Background for Vision & Mission section */
 .about-vision-paper {
   position: relative;
-  background: url('../assets/images/site/parchment-bg.jpg') center / cover no-repeat;
+  background: url('../assets/images/site/parchment-bg.png') center / cover no-repeat;
   color: #2C1E12;
   padding: 100px 0;
   border-top: 1px solid rgba(138, 59, 8, 0.2);

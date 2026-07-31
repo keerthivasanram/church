@@ -6,6 +6,7 @@ import Ambient from '../components/motion/Ambient'
 import Ornament from '../components/motion/Ornament'
 import Reveal from '../components/motion/Reveal'
 import Arrow from '../components/Arrow'
+import HeroLogo from '../components/HeroLogo'
 import './Invite.css'
 
 const initial = {
@@ -84,6 +85,7 @@ function Invite() {
       <div className="invite">
         {/* Fixed banner — stays pinned while the form scrolls up over it */}
         <section className="invite-banner">
+          <HeroLogo />
           <div className="invite-banner__bg" aria-hidden="true" />
           <div className="invite-banner__scrim" aria-hidden="true" />
           <Ambient rays dust tone="dark" />

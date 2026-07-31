@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import logo from '../assets/images/site/logo.png'
-import { site } from '../data/siteContent'
 import './Header.css'
 
 const links = [
@@ -40,10 +38,6 @@ function Header() {
   return (
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''} ${hidden && !open ? 'is-hidden' : ''}`}>
       <div className="container site-header__bar">
-        <NavLink to="/" className="site-header__logo" onClick={() => setOpen(false)}>
-          <img src={logo} alt={site.name} />
-        </NavLink>
-
         <nav className="site-nav">
           {links.map((link) => (
             <NavLink

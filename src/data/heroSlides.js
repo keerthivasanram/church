@@ -17,7 +17,7 @@ export const heroSlides = [
     title: 'The Gathered Church',
     caption: 'A hall filled, the cross standing behind the platform',
     focus: '50% 44%',
-    dim: 0.66,
+    dim: 0.78,
   },
   {
     src: altar,
@@ -25,7 +25,7 @@ export const heroSlides = [
     title: 'Prayer & Impartation',
     caption: 'Ministering at the altar, hand lifted to heaven',
     focus: '54% 40%',
-    dim: 0.6,
+    dim: 0.75,
   },
   {
     src: teaching,
@@ -33,7 +33,7 @@ export const heroSlides = [
     title: 'Opening the Word',
     caption: 'The Scriptures taught, the Book open on the pulpit',
     focus: '50% 46%',
-    dim: 0.56,
+    dim: 0.72,
   },
   {
     src: glory,
@@ -41,7 +41,7 @@ export const heroSlides = [
     title: 'You Would See the Glory',
     caption: 'After the meeting, beneath the promise of John 11:40',
     focus: '52% 52%',
-    dim: 0.5,
+    dim: 0.70,
   },
   {
     src: promise,
@@ -49,7 +49,7 @@ export const heroSlides = [
     title: 'Upon This Rock',
     caption: 'Among the churches — one body, many tongues',
     focus: '52% 44%',
-    dim: 0.54,
+    dim: 0.74,
   },
 ]
 

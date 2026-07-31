@@ -17,8 +17,7 @@
      --plate-dim is per-photograph: a bright white-ceilinged hall needs far
      more taking down than a dark auditorium, or the plates flicker in level
      as they change. */
-  filter: sepia(0.4) saturate(1.1) hue-rotate(-10deg)
-    brightness(var(--plate-dim, 0.46)) contrast(1.04);
+  filter: brightness(var(--plate-dim, 0.75)) contrast(1.04) saturate(1.05);
 }
 .chero__plate.is-lit { opacity: 1; }
 

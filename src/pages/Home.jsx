@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import CathedralHero from '../components/CathedralHero'
-import founderImg from '../assets/images/site/about-founder.jpg'
+import founderImg from '../assets/images/site/prophet-messenger.jpeg'
 import outreachImg from '../assets/images/site/outreach.jpg'
 import internationalImg from '../assets/images/site/international.jpg'
 import malaysiaImg from '../assets/images/site/malaysia-outreach.jpg'
@@ -50,10 +50,7 @@ function Home() {
         {/* ═══════════════ THE PROPHET ═══════════════ */}
         <section className="section hprophet manuscript-section" data-chapter="I" data-chapter-label="The Messenger">
           <div className="manuscript-bg" aria-hidden="true">
-            <div className="manuscript-bg__initial" data-depth="0.1">D</div>
-            <div className="manuscript-bg__text manuscript-bg__text--top" data-depth="0.2">ET VERBUM CARO<br/>FACTUM EST</div>
-            <div className="manuscript-bg__text manuscript-bg__text--bottom" data-depth="0.15">IN PRINCIPIO<br/>ERAT VERBUM<br/>ET VERBUM ERAT<br/>APUD DEUM</div>
-            <div className="manuscript-bg__initial manuscript-bg__initial--bottom" data-depth="0.1">ERBUM</div>
+            {/* Background text removed as requested */}
             
             <div className="manuscript-bg__ornament manuscript-bg__ornament--tl"></div>
             <div className="manuscript-bg__ornament manuscript-bg__ornament--tr"></div>
@@ -75,7 +72,7 @@ function Home() {
             </div>
             <Drift className="hprophet__text" speed={54} lateral={16}>
               <span className="eyebrow"><em className="chapter">I</em> The Messenger</span>
-              <h2>A vessel raised for the end-time harvest</h2>
+              <h2>A VESSEL RAISED FOR THE END-TIME HARVEST</h2>
               <p>{aboutUs.founderStory[0]}</p>
               <p>{aboutUs.founderStory[1]}</p>
               <Magnetic><Link to="/about" className="btn btn-ghost">His Story <Arrow /></Link></Magnetic>
@@ -106,7 +103,7 @@ function Home() {
           <div className="container hglobal__grid">
             <Drift className="hglobal__text" speed={48} lateral={-18}>
               <span className="eyebrow"><em className="chapter">III</em> The Mission</span>
-              <h2>Carrying the prophetic voice across the nations</h2>
+              <h2>CARRYING THE PROPHETIC VOICE ACROSS THE NATIONS</h2>
               <p className="lede">
                 From local outreach to international crusades, the Gospel and the
                 prophetic are carried across borders — raising leaders and revival

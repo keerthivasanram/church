@@ -6,6 +6,7 @@ import Ambient from '../components/motion/Ambient'
 import Ornament from '../components/motion/Ornament'
 import Reveal from '../components/motion/Reveal'
 import Arrow from '../components/Arrow'
+import HeroLogo from '../components/HeroLogo'
 import './Forms.css'
 
 const initial = { name: '', email: '', subject: '', message: '', status: '' }
@@ -67,6 +68,7 @@ function Contact() {
       <div className="fpage">
         {/* Fixed banner */}
         <section className="fbanner">
+          <HeroLogo />
           <div className="fbanner__bg" aria-hidden="true" />
           <div className="fbanner__scrim" aria-hidden="true" />
           <Ambient rays dust tone="dark" />

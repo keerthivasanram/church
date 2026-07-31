@@ -11,6 +11,7 @@ import {
 import Ambient from './motion/Ambient'
 import Ornament from './motion/Ornament'
 import Magnetic from './motion/Magnetic'
+import HeroLogo from './HeroLogo'
 import { useHeroSlides, HeroSlidePlates, HeroSlideRail } from './HeroSlides'
 import { site, stats, focusAreas } from '../data/siteContent'
 import prophetCutout from '../assets/images/site/prophet-daniel-bennet.png'
@@ -66,6 +67,7 @@ function CathedralHero() {
 
   return (
     <section className="chero" ref={ref} onMouseMove={onMove} onMouseLeave={onLeave}>
+      <HeroLogo />
       {/* 1–2 · the plate — five photographs cross-dissolving on the camera-zoom
               stage — plus the colour grade over them */}
       <motion.div className="chero__stage" style={reduce ? staticStyle : { scale: bgScale, y: bgY }}>
@@ -107,68 +109,120 @@ function CathedralHero() {
             animate={reduce ? undefined : 'show'}
             variants={reduce ? undefined : { show: { transition: { staggerChildren: 0.5, delayChildren: 0.3 } } }}
           >
-            <motion.span className="chero__kicker" variants={reduce ? undefined : word}>
-              {site.founder}
-            </motion.span>
-
             <h1 className="chero__title">
               <motion.span className="chero__word chero__word--1" variants={reduce ? undefined : word}>Encounter</motion.span>
-              <motion.span className="chero__word chero__word--2 accent" variants={reduce ? undefined : word}>Christ.</motion.span>
+              <motion.span className="chero__word chero__word--2 accent" variants={reduce ? undefined : word}>
+                <span>C</span><span>H</span><span>R</span><span>I</span><span>S</span><span>T</span>
+              </motion.span>
             </h1>
 
             <motion.div className="chero__meta" variants={reduce ? undefined : word}>
-              <Ornament center={false} small />
-              <span className="chero__ref">Isaiah&nbsp;II&nbsp;·&nbsp;3</span>
+              <span className="chero__meta-line" aria-hidden="true" />
+              <span className="chero__ref">ISAIAH 11 : 3</span>
             </motion.div>
 
-            {/* what this ministry actually does — the subjects of the work */}
-            <motion.ul className="chero__subjects" variants={reduce ? undefined : word}>
-              {focusAreas.slice(0, 3).map((f) => (
-                <li key={f}><span className="chero__subject-mark" aria-hidden="true" />{f}</li>
-              ))}
-            </motion.ul>
+            <motion.div className="chero__features" variants={reduce ? undefined : word}>
+              <div className="chero__feature">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M17.5 19C17.5 19 19 17.5 19 15C19 11 12 4 12 4C12 4 5 11 5 15C5 17.5 6.5 19 6.5 19" />
+                  <path d="M12 21C14 21 15.5 19.5 15.5 17.5C15.5 15 12 11 12 11C12 11 8.5 15 8.5 17.5C8.5 19.5 10 21 12 21Z" fill="currentColor"/>
+                </svg>
+                <span>PROPHETIC<br/>TRAINING</span>
+              </div>
+              <div className="chero__feature">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M12 21C12 21 21 16 21 9.5C21 6 18.5 3.5 15.5 3.5C13.5 3.5 12 5 12 5C12 5 10.5 3.5 8.5 3.5C5.5 3.5 3 6 3 9.5C3 16 12 21 12 21Z" />
+                </svg>
+                <span>HEALING &<br/>DELIVERANCE</span>
+              </div>
+              <div className="chero__feature">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" />
+                  <path d="M9 12L11 14L15 10" />
+                </svg>
+                <span>IMPARTATION OF<br/>THE ANOINTING</span>
+              </div>
+              <div className="chero__feature">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <ellipse cx="12" cy="12" rx="4" ry="10" />
+                  <path d="M2 12H22" />
+                </svg>
+                <span>KINGDOM<br/>OUTREACH</span>
+              </div>
+            </motion.div>
 
             {/* the two ways in — arriving last, after the scene has settled */}
             <motion.div className="chero__actions" variants={reduce ? undefined : word}>
-              <Magnetic><Link to="/invite" className="btn btn-outline">Invite the Prophet</Link></Magnetic>
+              <Magnetic>
+                <Link to="/invite" className="btn btn-primary-glow">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 20C4 16 8 14 12 14C16 14 20 16 20 20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                  <span>INVITE THE PROPHET</span>
+                </Link>
+              </Magnetic>
               <Magnetic>
                 <a
                   href={site.social.youtube}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn btn-youtube"
+                  className="btn btn-outline"
                 >
-                  <svg viewBox="0 0 24 24" width="20" height="20" className="btn-youtube__icon" aria-hidden="true">
-                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z" fill="#FF0000" />
-                    <path d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FFFFFF" />
+                  <svg viewBox="0 0 24 24" width="20" height="20" className="btn-youtube__icon" aria-hidden="true" fill="currentColor">
+                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                    <path d="M10 8L16 12L10 16V8Z" />
                   </svg>
-                  <span>Watch on YouTube</span>
+                  <span>WATCH ON YOUTUBE</span>
                 </a>
               </Magnetic>
+              
+              {/* Prophet card inline with actions */}
+              <motion.div className="chero__prophet-card inline" variants={reduce ? undefined : word} initial={reduce ? false : 'hidden'} animate={reduce ? undefined : 'show'}>
+                 <div className="prophet-card__signature">Prophet</div>
+                 <div className="prophet-card__name">DANIEL BENNET</div>
+                 <div className="prophet-card__sub">SERVING GOD. IMPACTING NATIONS.</div>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
       </motion.div>
 
       {/* the proof, set quietly along the floor of the nave */}
-      <motion.div
-        className="chero__ledger"
-        initial={reduce ? false : { opacity: 0, y: 20 }}
-        animate={reduce ? undefined : { opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="container chero__ledger-row">
-          {stats.map((s) => (
-            <div className="chero__stat" key={s.label}>
-              <span className="chero__stat-num">{s.value}{s.suffix}</span>
-              <span className="chero__stat-label">{s.label}</span>
+      <div className="chero__ledger">
+        <div className="container">
+          <motion.div
+            className="chero__ledger-row"
+            initial={reduce ? false : { opacity: 0, y: 30 }}
+            animate={reduce ? undefined : { opacity: 1, y: 0 }}
+            transition={reduce ? undefined : { duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="chero__stat-block">
+              <span className="chero__stat-val">6+</span>
+              <span className="chero__stat-lbl">YEARS OF MINISTRY</span>
             </div>
-          ))}
+            <div className="chero__stat-divider" />
+            <div className="chero__stat-block">
+              <span className="chero__stat-val">15+</span>
+              <span className="chero__stat-lbl">NATIONS REACHED</span>
+            </div>
+            <div className="chero__stat-divider" />
+            <div className="chero__stat-block">
+              <span className="chero__stat-val">120+</span>
+              <span className="chero__stat-lbl">CHURCHES MINISTERED</span>
+            </div>
+            <div className="chero__stat-divider" />
+            <div className="chero__stat-block">
+              <span className="chero__stat-val">10K+</span>
+              <span className="chero__stat-lbl">LIVES TOUCHED</span>
+            </div>
+          </motion.div>
         </div>
-      </motion.div>
+      </div>
 
       {/* the plate's own controls, on the ledge just above the ledger */}
-      <HeroSlideRail {...slides} />
+      {/* Removed HeroSlideRail as per redesign exact matching */}
 
       {/* silent scroll cue */}
       <motion.div

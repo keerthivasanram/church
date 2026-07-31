@@ -9,6 +9,7 @@ import Ambient from '../components/motion/Ambient'
 import { Stagger, StaggerItem } from '../components/motion/Stagger'
 import SectionHeading from '../components/SectionHeading'
 import Counter from '../components/Counter'
+import HeroLogo from '../components/HeroLogo'
 import './About.css'
 
 function About() {
@@ -22,6 +23,7 @@ function About() {
       </Helmet>
 
       <section className="page-hero">
+        <HeroLogo />
         <div className="container">
           <Reveal>
             <span className="eyebrow eyebrow--center">About Us</span>

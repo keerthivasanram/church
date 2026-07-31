@@ -1,0 +1,29 @@
+.hero-top-logo {
+  position: absolute;
+  top: 24px;
+  left: max(32px, calc((100% - 1200px) / 2 + 32px));
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.hero-top-logo:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+.hero-top-logo img {
+  height: 76px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.4)) brightness(1.2); /* Brighter logo */
+}
+
+@media (max-width: 900px) {
+  .hero-top-logo {
+    top: 16px;
+    left: 20px;
+  }
+  .hero-top-logo img {
+    height: 54px;
+  }
+}
