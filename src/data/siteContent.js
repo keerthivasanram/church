@@ -99,6 +99,9 @@ export const testimonials = [
   { quote: 'God used this ministry to restore my family. We are walking in a new season of breakthrough.', name: 'Daniel & Anita', role: 'Coimbatore' },
   { quote: 'The impartation service changed my life. The gifts God placed in me were stirred and activated.', name: 'Peter K.', role: 'Malaysia' },
   { quote: 'A true end-time voice. Every message carries conviction, hope, and the fire of the Spirit.', name: 'Esther R.', role: 'Vellore' },
+  { quote: 'Years of addiction broke off me in a single night of ministry. I am free, and my family has their son back.', name: 'Joseph V.', role: 'Madurai' },
+  { quote: 'The word of knowledge spoken over me was so specific only God could have known it. It rebuilt my trust in Him.', name: 'Priscilla D.', role: 'Kochi' },
+  { quote: 'What began as one meeting became a complete turnaround for our church. Hunger for the presence of God spread through our whole congregation.', name: 'Pastor Thomas A.', role: 'Singapore' },
 ]
 
 export const galleryCount = 23

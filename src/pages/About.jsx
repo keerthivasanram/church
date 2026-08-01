@@ -34,12 +34,15 @@ function About() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container about-split">
+      <section className="section about-founder-paper">
+        <div className="container about-split" style={{ position: 'relative', zIndex: 10 }}>
           <div className="about-split__figure-wrapper">
-            <Reveal variant="veil" className="about-split__figure">
-              <img src={founderImg} alt="Prophet Daniel Bennet" />
-            </Reveal>
+            <div className="founder-image-card">
+              <Ambient rays dust sparkles tone="dark" />
+              <Reveal variant="veil" className="about-split__figure">
+                <img src={founderImg} alt="Prophet Daniel Bennet" />
+              </Reveal>
+            </div>
           </div>
           <Reveal delay={0.1} className="about-split__body">
             <span className="eyebrow">Founder</span>

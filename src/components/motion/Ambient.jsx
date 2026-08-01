@@ -6,7 +6,7 @@ import './Ambient.css'
  * and slow fog. Drop inside any position:relative section, behind its content.
  * `tone`: 'gold' (light halls) | 'dark' (shadowed naves).
  */
-function Ambient({ rays = true, dust = true, fog = false, tone = 'gold' }) {
+function Ambient({ rays = true, dust = true, fog = false, sparkles = false, tone = 'gold' }) {
   const reduce = useReducedMotion()
   if (reduce) return null
   return (
@@ -20,6 +20,13 @@ function Ambient({ rays = true, dust = true, fog = false, tone = 'gold' }) {
       {dust && (
         <div className="ambient__dust">
           {Array.from({ length: 14 }).map((_, i) => (
+            <span key={i} />
+          ))}
+        </div>
+      )}
+      {sparkles && (
+        <div className="ambient__sparkles">
+          {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} />
           ))}
         </div>

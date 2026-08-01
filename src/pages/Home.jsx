@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import CathedralHero from '../components/CathedralHero'
 import founderImg from '../assets/images/site/prophet-messenger.jpeg'
+import qrImage from '../assets/images/site/qr-code.jpg'
 import outreachImg from '../assets/images/site/outreach.jpg'
 import internationalImg from '../assets/images/site/international.jpg'
 import malaysiaImg from '../assets/images/site/malaysia-outreach.jpg'
@@ -11,7 +12,6 @@ import conferencePosterImg from '../assets/images/posters/prophetic-misphacha-co
 import { site, aboutUs, ministries, stats, testimonials } from '../data/siteContent'
 import { galleryImages } from '../data/gallery'
 import Reveal from '../components/motion/Reveal'
-import { Stagger, StaggerItem } from '../components/motion/Stagger'
 import Ambient from '../components/motion/Ambient'
 import Ornament from '../components/motion/Ornament'
 import Cinema from '../components/motion/Cinema'
@@ -29,6 +29,9 @@ import './Home.css'
 function Home() {
   const [posterOpen, setPosterOpen] = useState(false)
   const previewImages = galleryImages.slice(0, 6)
+
+  // doubled so the track can loop seamlessly from -50% back to 0
+  const witnessReel = [...testimonials, ...testimonials]
 
   return (
     <>
@@ -128,7 +131,7 @@ function Home() {
             <div className="hglobal__gallery">
               <div className="hglobal__col">
                 <FlyImage className="hglobal__img" src={internationalImg} alt="International crusade" from="right" speed={62} />
-                <FlyImage className="hglobal__img" src={brochureFlyerImg} alt="Ministry brochure crusade" from="right" speed={30} depth={0.85} />
+                <FlyImage className="hglobal__img" src={conferencePosterImg} alt="Prophetic Misphacha Conference" from="right" speed={30} depth={0.85} />
               </div>
               <div className="hglobal__col hglobal__col--low">
                 <FlyImage className="hglobal__img" src={outreachImg} alt="Outreach ministry" from="right" speed={-32} depth={0.8} />
@@ -154,28 +157,29 @@ function Home() {
         <section className="section htest" data-chapter="V" data-chapter-label="The Witness">
           <div className="container">
             <SectionHeading eyebrow={<><em className="chapter">V</em> The Witness</>} title="Lives Transformed by His Presence" />
-            <Stagger className="grid htest__grid">
-              {testimonials.slice(0, 3).map((t, i) => (
-                <StaggerItem key={t.name} hover>
-                  <Drift speed={i === 1 ? 34 : 12} fade={false}>
-                    <figure className="htest__plaque">
-                      <span className="htest__seal" aria-hidden="true">
-                        <svg viewBox="0 0 40 40" width="34" height="34">
-                          <circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" strokeWidth="0.8" opacity="0.55" />
-                          <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.35" />
-                          <path d="M20 9v22M13 16h14" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
-                        </svg>
-                      </span>
-                      <blockquote>{t.quote}</blockquote>
-                      <figcaption>
-                        <span className="htest__name">{t.name}</span>
-                        <span className="htest__place">{t.role}</span>
-                      </figcaption>
-                    </figure>
-                  </Drift>
-                </StaggerItem>
-              ))}
-            </Stagger>
+            <Reveal className="htest__marquee">
+              <div
+                className="htest__marquee-track"
+                style={{ '--marquee-duration': `${testimonials.length * 7}s` }}
+              >
+                {witnessReel.map((t, i) => (
+                  <figure className="htest__plaque" key={`${t.name}-${i}`}>
+                    <span className="htest__seal" aria-hidden="true">
+                      <svg viewBox="0 0 40 40" width="34" height="34">
+                        <circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" strokeWidth="0.8" opacity="0.55" />
+                        <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" strokeWidth="0.5" opacity="0.35" />
+                        <path d="M20 9v22M13 16h14" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+                      </svg>
+                    </span>
+                    <blockquote>{t.quote}</blockquote>
+                    <figcaption>
+                      <span className="htest__name">{t.name}</span>
+                      <span className="htest__place">{t.role}</span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </Reveal>
           </div>
         </section>
 
@@ -344,11 +348,102 @@ function Home() {
           <div className="container">
             <Reveal variant="blur" className="hprayer__inner">
               <span className="eyebrow eyebrow--center"><em className="chapter">VIII</em> The Invitation</span>
-              <h2>Invite Prophet Daniel Bennet<br />to your church or event</h2>
+              <h2>INVITE PROPHET DANIEL BENNET<br />TO YOUR CHURCH OR CONFERENCE TO SPEAK</h2>
               <Ornament center />
               <p>{aboutUs.founderStory[2]}</p>
               <Magnetic><Link to="/invite" className="btn btn-outline">Send an Invitation <Arrow /></Link></Magnetic>
             </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════════ GIVING / PAYMENT ═══════════════ */}
+        <section className="section section-soft hgiving section-scripture-bg" data-chapter="IX" data-chapter-label="Giving">
+          <Ambient rays dust tone="gold" />
+          <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+            
+            {/* Custom Styled Heading */}
+            <div className="section-head" style={{ marginBottom: '72px', position: 'relative' }}>
+              <span className="eyebrow eyebrow--center"><em className="chapter">IX</em> Support the Ministry</span>
+              <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(44px, 7vw, 92px)', fontWeight: '400', letterSpacing: '0.03em', color: 'var(--white)', marginTop: '20px', textShadow: '0 10px 40px rgba(0,0,0,0.6)' }}>
+                PARTNER <span style={{ fontStyle: 'italic', color: 'var(--gold)', textTransform: 'lowercase', letterSpacing: '0.05em' }}>with us</span>
+              </h2>
+              <Ornament center />
+              <p style={{ 
+                fontFamily: 'var(--font-display)', 
+                fontSize: 'clamp(24px, 3vw, 32px)', 
+                color: 'rgba(255, 255, 255, 0.9)', 
+                maxWidth: '720px', 
+                margin: '36px auto 0', 
+                lineHeight: '1.3',
+                letterSpacing: '0.02em',
+                textShadow: '0 4px 20px rgba(0,0,0,0.4)' 
+              }}>
+                Your seed helps us take the <span style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>prophetic voice</span> across the nations.
+              </p>
+            </div>
+
+            <div className="hgiving__grid">
+              {/* Left Side: Account Details */}
+              <div className="card card--stone hgiving__card">
+                <span className="eyebrow" style={{ marginBottom: '12px' }}>Direct Transfer</span>
+                <h3 style={{ color: 'var(--white)', marginBottom: '8px', fontSize: '28px' }}>Bank Account</h3>
+                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px', marginBottom: '40px', maxWidth: '340px' }}>
+                  For international or domestic wire transfers directly to the ministry.
+                </p>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  {/* Row: Bank */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '110px 1fr', gap: '16px', alignItems: 'baseline', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '12px' }}>
+                    <span style={{ color: 'var(--muted)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.15em' }}>Bank</span>
+                    <span style={{ color: 'var(--gold-light)', fontSize: '20px', fontFamily: 'var(--font-display)', fontStyle: 'italic', letterSpacing: '0.02em' }}>State Bank of India</span>
+                  </div>
+                  
+                  {/* Row: Account Name */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '110px 1fr', gap: '16px', alignItems: 'baseline', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '12px' }}>
+                    <span style={{ color: 'var(--muted)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.15em' }}>Acc Name</span>
+                    <span style={{ color: 'var(--white)', fontSize: '15px', fontWeight: '600', letterSpacing: '0.15em', textTransform: 'uppercase' }}>DANIEL BENNET</span>
+                  </div>
+
+                  {/* Row: Account No */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '110px 1fr', gap: '16px', alignItems: 'baseline', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '12px' }}>
+                    <span style={{ color: 'var(--muted)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.15em' }}>Acc No.</span>
+                    <span style={{ color: 'var(--gold)', fontSize: '20px', fontWeight: '500', letterSpacing: '0.1em' }}>20190093101</span>
+                  </div>
+
+                  {/* Grid: Codes & Branch */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', paddingTop: '12px' }}>
+                    <div>
+                      <span style={{ display: 'block', color: 'var(--muted)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '6px' }}>IFSC Code</span>
+                      <span style={{ color: 'var(--white)', fontSize: '14px', letterSpacing: '0.08em', fontWeight: '500' }}>SBIN0005200</span>
+                    </div>
+                    <div>
+                      <span style={{ display: 'block', color: 'var(--muted)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '6px' }}>Branch Code</span>
+                      <span style={{ color: 'var(--white)', fontSize: '14px', letterSpacing: '0.08em', fontWeight: '500' }}>005200</span>
+                    </div>
+                    <div>
+                      <span style={{ display: 'block', color: 'var(--muted)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '6px' }}>MICR Code</span>
+                      <span style={{ color: 'var(--white)', fontSize: '14px', letterSpacing: '0.08em', fontWeight: '500' }}>600002119</span>
+                    </div>
+                    <div>
+                      <span style={{ display: 'block', color: 'var(--muted)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: '6px' }}>Branch</span>
+                      <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px', lineHeight: '1.5', display: 'block' }}>Porur, Chennai<br/>Tamil Nadu, India</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side: QR Code */}
+              <div className="card card--stone hgiving__card hgiving__qr-box" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <span className="eyebrow" style={{ marginBottom: '12px' }}>Digital Giving</span>
+                <h3 style={{ color: 'var(--white)', marginBottom: '8px', fontSize: '28px' }}>Scan to Give</h3>
+                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px', marginBottom: '40px', maxWidth: '280px' }}>
+                  Use any UPI or mobile payment app to scan and give instantly.
+                </p>
+                <div className="hgiving__qr-image-wrapper">
+                  <img src={qrImage} alt="Scan to Give" className="hgiving__qr-image" />
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </div>

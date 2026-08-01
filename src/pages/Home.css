@@ -593,13 +593,16 @@
   position: relative;
   box-shadow: var(--shadow-lg);
   border: 1px solid rgba(var(--accent-rgb), 0.35);
+  max-width: 520px;
+  margin: 0 auto;
 }
 /* the plate flies — its photograph keeps its own proportion inside the frame */
 .hprophet__frame img {
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 5;
+  height: clamp(480px, 58vh, 580px);
+  aspect-ratio: 0.95 / 1;
   object-fit: cover;
+  object-position: 78% 20%;
 }
 .hprophet__plate {
   position: absolute;
@@ -802,11 +805,30 @@
 /* The hall itself lives in Colonnade.css — it is full-bleed and pinned, so
    this section only supplies the heading above it. */
 
-/* ═══════════════ TESTIMONIES — engraved marble plaques ═══════════════ */
-.htest__grid { grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 3vw, 44px); }
+/* ═══════════════ TESTIMONIES — engraved marble plaques, in continuous drift ═══════════════ */
+.htest__marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+.htest__marquee-track {
+  display: flex;
+  width: max-content;
+  gap: clamp(24px, 3vw, 44px);
+  animation: htest-drift var(--marquee-duration, 60s) linear infinite;
+}
+@keyframes htest-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - (clamp(24px, 3vw, 44px) / 2))); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .htest__marquee-track { animation: none; }
+  .htest__marquee { overflow-x: auto; }
+}
 .htest__plaque {
   position: relative;
-  height: 100%;
+  flex: 0 0 clamp(280px, 30vw, 360px);
+  width: clamp(280px, 30vw, 360px);
   margin: 0;
   padding: 48px 34px 38px;
   text-align: center;
@@ -877,7 +899,7 @@
 .hprayer__bg {
   position: absolute;
   inset: 0;
-  background: url('../assets/images/site/hero-stained-glass.jpg') center 60% / cover no-repeat;
+  background: url('../assets/images/site/cathedral-nave-light.jpg') center 40% / cover no-repeat;
   opacity: 0.28;
   filter: grayscale(0.2);
 }
@@ -887,8 +909,8 @@
   inset: 0;
   background: radial-gradient(120% 100% at 50% 50%, transparent 20%, rgba(8, 8, 9, 0.7) 100%);
 }
-.hprayer__inner { position: relative; z-index: 3; max-width: 760px; margin: 0 auto; }
-.hprayer__inner h2 { color: var(--white); font-size: clamp(32px, 4.5vw, 56px); }
+.hprayer__inner { position: relative; z-index: 3; max-width: 900px; margin: 0 auto; }
+.hprayer__inner h2 { color: var(--white); font-size: clamp(26px, 3.5vw, 42px); }
 .hprayer__inner p {
   color: rgba(246, 245, 243, 0.78);
   max-width: 560px;
@@ -1093,7 +1115,6 @@
 
 /* ═══════════════ RESPONSIVE ═══════════════ */
 @media (max-width: 980px) {
-  .htest__grid { grid-template-columns: repeat(2, 1fr); }
   .hconference__grid {
     grid-template-columns: 1fr;
     gap: 36px;
@@ -1126,7 +1147,51 @@
 @media (max-width: 560px) {
   .chero__word { font-size: clamp(38px, 12.4vw, 76px); }
   .chero__word--2 { margin-left: 0.4em; }
-  .htest__grid { grid-template-columns: 1fr; }
+  .htest__plaque { flex-basis: 78vw; width: 78vw; }
   .hglobal__gallery { grid-template-columns: 1fr 1fr; }
   .hglobal__stats { grid-template-columns: 1fr 1fr; }
 }
+
+/* ═══════════════ GIVING / PAYMENT ═══════════════ */
+.hgiving__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 48px;
+  align-items: stretch;
+}
+.hgiving__card {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hgiving__bank-box {
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.hgiving__qr-box {
+  align-items: center;
+  text-align: center;
+}
+.hgiving__qr-image-wrapper {
+  background: rgba(255, 255, 255, 1);
+  padding: 16px;
+  border-radius: 12px;
+  display: inline-block;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+}
+.hgiving__qr-image {
+  width: 220px;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+}
+
+@media (max-width: 860px) {
+  .hgiving__grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
